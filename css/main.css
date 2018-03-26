@@ -1,0 +1,36 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Source Sans Pro", sans-serif;
+    color: #eee;
+    background: #333;
+}
+
+#container {
+    width: 500px;
+    margin: 60px auto;
+}
+
+svg {
+    display: block;
+    border: 1px solid #999999;
+    display: hide;
+}
+
+.path {
+    stroke: #555555;
+    stroke-width: 0.5;
+    fill: none;
+}
+.path--alt { stroke: #666666 }
+.path--blue { stroke: #00b8a9 }
+.path--red { stroke: #e23e57 }
+.path--yellow { stroke: #ff9a00 }
+.path--filled {
+    fill: #00b8a9;
+    stroke: #00b8a9;
+}
+
+.hide {
+    display: none;
+}

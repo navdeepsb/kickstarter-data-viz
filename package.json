@@ -1,0 +1,15 @@
+{
+  "name": "kickstarter-watermelon",
+  "version": "1.0.0",
+  "description": "d3 playground for si649's academic group project, winter '18",
+  "main": "js/main.js",
+  "scripts": {
+    "start": "clear && python -m SimpleHTTPServer 19019"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Navdeep Bagga <navdeepb3191@gmail.com>",
+  "license": "ISC"
+}

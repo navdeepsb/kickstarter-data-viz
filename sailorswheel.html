@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Kickstarter Data Visualization | U-M si649 w18</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+	<div id="container">
+		<div id="canvas">
+            <svg id="main" class="svg" width="500" height="500" viewBox="0 0 500 500">
+            	<g id="axes" transform="rotate(15 250,250)">
+	                <circle class="path" cx="250" cy="250" r="50" />
+	                <circle class="path path--red" cx="250" cy="250" r="150" stroke-dasharray="5" />
+	                <path class="path path--alt" d="M250,50 v400" />
+	                <path class="path path--alt" d="M250,50 v400" transform="rotate( 90 250,250)" />
+	                <path class="path path--alt" d="M250,50 v400" transform="rotate( 30 250,250)" />
+	                <path class="path path--alt" d="M250,50 v400" transform="rotate(-30 250,250)" />
+	                <path class="path path--alt" d="M250,50 v400" transform="rotate( 60 250,250)" />
+	                <path class="path path--alt" d="M250,50 v400" transform="rotate(-60 250,250)" />
+               </g><!-- #axes -->
+            	<g id="axes2">
+	                <path class="path" d="M250,50 v400" stroke-dasharray="5" />
+	                <path class="path" d="M250,50 v400" transform="rotate( 90 250,250)" stroke-dasharray="5" />
+	                <path class="path" d="M250,50 v400" transform="rotate( 30 250,250)" stroke-dasharray="5" />
+	                <path class="path" d="M250,50 v400" transform="rotate(-30 250,250)" stroke-dasharray="5" />
+	                <path class="path" d="M250,50 v400" transform="rotate( 60 250,250)" stroke-dasharray="5" />
+	                <path class="path" d="M250,50 v400" transform="rotate(-60 250,250)" stroke-dasharray="5" />
+               </g><!-- #axes2 -->
+               <g id="data">
+               </g><!-- #data -->
+            </svg>
+
+			<p id="loader">Loading...</p>
+		</div><!-- #canvas -->
+	</div><!-- #container -->
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
