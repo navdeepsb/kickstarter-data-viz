@@ -7,8 +7,8 @@ const loaderElem = document.getElementById( "loader" );
 const tipElem = document.getElementById( "tooltip" );
 const filtersElem = document.getElementById( "filters" );
 const showOffset = true;
-const dataFile = "/data/final-data-opt-2000rec.min.json";
-// const dataFile = "/data/final-data-opt-140862rec.min.json";
+const dataFile = "data/final-data-opt-2000rec.min.json";
+// const dataFile = "data/final-data-opt-140862rec.min.json";
 const tipData = {
 	"name": "Name",
 	"category_name": "Category",
@@ -92,7 +92,7 @@ $.getJSON( dataFile, ( data, msg ) => {
 		categories[ d.category_name ] += 1;
 	}
 
-	loaderElem.classList.add( "hide" );
+	loaderElem.innerText = "Hover over each dot to view details...";
 	console.log( categories );
 
 	let li = null;
