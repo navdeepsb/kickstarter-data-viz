@@ -1,14 +1,14 @@
 {
-  "name": "kickstarter-watermelon",
+  "name": "kickstarter-data-viz",
   "version": "1.0.0",
-  "description": "d3 playground for si649's academic group project, winter '18",
+  "description": "A web app to create information visualization for Kickstarter projects data for si649's academic group project, winter '18",
   "main": "js/main.js",
   "scripts": {
     "start": "clear && python -m SimpleHTTPServer 19019"
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/navdeepsb/kickstarter-data-viz.git"
   },
   "author": "Navdeep Bagga <navdeepb3191@gmail.com>",
   "license": "ISC"
