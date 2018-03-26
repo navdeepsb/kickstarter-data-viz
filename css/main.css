@@ -31,8 +31,6 @@ svg {
     stroke: #00b8a9;
 }
 .path--point:hover {
-    fill: #ff9a00;
-    stroke: #ff9a00;
     stroke-width: 6;
 }
 
@@ -47,6 +45,7 @@ svg {
     display: inline-block;
     margin-right: 10px;
     font-size: 0.8rem;
+    vertical-align: top;
 }
 .row .col:nth-child( 1 ) { width: 30%; }
 .row .col:nth-child( 2 ) { width: 60%; }

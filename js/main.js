@@ -1,4 +1,5 @@
 // ...
+const pointRadius = 1.5;
 const innerCircleRadius = 50;
 const SVG_NS = "http://www.w3.org/2000/svg";
 const dataElem = document.getElementById( "data" );
@@ -43,6 +44,11 @@ let hideTip = ( e ) => {
 
 
 // ...
+let categories = {};
+let getCategoryClassName = ( s ) => "cat--" + s.replace( " ", "-" ).toLowerCase();
+
+
+// ...
 $.getJSON( dataFile, ( data, msg ) => {
 	let d = null;
 	let pointElem = null;
@@ -55,9 +61,9 @@ $.getJSON( dataFile, ( data, msg ) => {
 		pointElem = document.createElementNS( SVG_NS, "circle" );
 		pointElem.setAttribute( "cx", 250 );
 		pointElem.setAttribute( "cy", 250 );
-		pointElem.setAttribute( "r", 2 );
+		pointElem.setAttribute( "r", pointRadius );
 		pointElem.setAttribute( "data-info", JSON.stringify( d ) );
-		pointElem.classList.add( "path", "path--point" );
+		pointElem.classList.add( "path", "path--point", `${ getCategoryClassName( d.category_name ) }` );
 
 		pointElem.addEventListener( "mouseover", showTip );
 		pointElem.addEventListener( "mouseleave", hideTip );
@@ -70,11 +76,16 @@ $.getJSON( dataFile, ( data, msg ) => {
 			translate(${ innerCircleRadius + Math.round( d.perc_pledged )} 0)
 			` );
 
-		// console.log( pointElem )
 		dataElem.appendChild( pointElem );
+
+		if( !categories.hasOwnProperty( d.category_name ) ) {
+			categories[ d.category_name ] = 0;
+		}
+		categories[ d.category_name ] += 1;
 	}
 
 	loaderElem.classList.add( "hide" );
+	console.log( categories );
 });
 
 
