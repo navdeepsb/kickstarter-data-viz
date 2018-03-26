@@ -14,7 +14,6 @@ body {
 svg {
     display: block;
     border: 1px solid #999999;
-    display: hide;
 }
 
 .path {
@@ -26,11 +25,35 @@ svg {
 .path--blue { stroke: #00b8a9 }
 .path--red { stroke: #e23e57 }
 .path--yellow { stroke: #ff9a00 }
-.path--filled {
+.path--point {
+    cursor: pointer;
     fill: #00b8a9;
     stroke: #00b8a9;
+}
+.path--point:hover {
+    fill: #ff9a00;
+    stroke: #ff9a00;
+    stroke-width: 6;
 }
 
 .hide {
     display: none;
+}
+
+#tooltip {
+    margin-top: 20px;
+}
+.row .col {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 0.8rem;
+}
+.row .col:nth-child( 1 ) { width: 30%; }
+.row .col:nth-child( 2 ) { width: 60%; }
+.row .col.col--right {
+    text-align: right;
+    font-weight: bold;
+}
+.row .col p {
+    margin: 0;
 }
