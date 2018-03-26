@@ -5,8 +5,9 @@ const SVG_NS = "http://www.w3.org/2000/svg";
 const dataElem = document.getElementById( "data" );
 const loaderElem = document.getElementById( "loader" );
 const tipElem = document.getElementById( "tooltip" );
+const filtersElem = document.getElementById( "filters" );
 const showOffset = true;
-const dataFile = "/data/final-data-opt-500rec.min.json";
+const dataFile = "/data/final-data-opt-2000rec.min.json";
 // const dataFile = "/data/final-data-opt-140862rec.min.json";
 const tipData = {
 	"name": "Name",
@@ -54,16 +55,23 @@ $.getJSON( dataFile, ( data, msg ) => {
 	let pointElem = null;
 	let monthIdx = null;
 	let offsetAngle = null;
+	let thisCatg = null;
+	let currCatg = location.href.split( "filter=" )[ 1 ];
 
 	for( let i = 0, len = data.length; i < len; i++ ) {
 		d = data[ i ];
+		thisCatg = getCategoryClassName( d.category_name );
+
+		if( currCatg && ( currCatg !== thisCatg ) ) {
+			continue;
+		}
 
 		pointElem = document.createElementNS( SVG_NS, "circle" );
 		pointElem.setAttribute( "cx", 250 );
 		pointElem.setAttribute( "cy", 250 );
 		pointElem.setAttribute( "r", pointRadius );
 		pointElem.setAttribute( "data-info", JSON.stringify( d ) );
-		pointElem.classList.add( "path", "path--point", `${ getCategoryClassName( d.category_name ) }` );
+		pointElem.classList.add( "path", "path--point", `${ thisCatg }` );
 
 		pointElem.addEventListener( "mouseover", showTip );
 		pointElem.addEventListener( "mouseleave", hideTip );
@@ -86,6 +94,18 @@ $.getJSON( dataFile, ( data, msg ) => {
 
 	loaderElem.classList.add( "hide" );
 	console.log( categories );
+
+	let li = null;
+	let link = null;
+	Object.keys( categories ).forEach( ( c ) => {
+		li = document.createElement( "li" );
+		link = document.createElement( "a" );
+		link.setAttribute( "href", "?filter=" + getCategoryClassName( c ) )
+		link.innerText = c + " (" + categories[ c ] + ")";
+		link.classList.add( "filter", getCategoryClassName( c ) );
+		li.appendChild( link );
+		filtersElem.appendChild( li );
+	});
 });
 
 

@@ -1,53 +1,53 @@
 .cat--digital-art {
     fill: #e23e57;
     stroke: #e23e57;
-    background: #e23e57;
+    color: #e23e57;
 }
 
 .cat--art {
     fill: #f9ed69;
     stroke: #f9ed69;
-    background: #f9ed69;
+    color: #f9ed69;
 }
 
 .cat--conceptual-art {
     fill: #f8f3d4;
     stroke: #f8f3d4;
-    background: #f8f3d4;
+    color: #f8f3d4;
 }
 
 .cat--illustration {
     fill: #9bdd10;
     stroke: #9bdd10;
-    background: #9bdd10;
+    color: #9bdd10;
 }
 
 .cat--mixed-media {
     fill: #eeeeee;
     stroke: #eeeeee;
-    background: #eeeeee;
+    color: #eeeeee;
 }
 
 .cat--painting {
     fill: #fecea8;
     stroke: #fecea8;
-    background: #fecea8;
+    color: #fecea8;
 }
 
 .cat--performance-art {
     fill: #dcedc2;
     stroke: #dcedc2;
-    background: #dcedc2;
+    color: #dcedc2;
 }
 
 .cat--public-art {
     fill: #7e80ff;
     stroke: #7e80ff;
-    background: #7e80ff;
+    color: #7e80ff;
 }
 
 .cat--sculpture {
     fill: #de95ba;
     stroke: #de95ba;
-    background: #de95ba;
+    color: #de95ba;
 }
