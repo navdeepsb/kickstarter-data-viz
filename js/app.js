@@ -39,7 +39,7 @@ let showTip = ( e ) => {
     tipElem.classList.remove( "hide" );
 };
 let hideTip = ( e ) => {
-    // tipElem.classList.add( "hide" );
+    tipElem.classList.add( "hide" );
 };
 
 
