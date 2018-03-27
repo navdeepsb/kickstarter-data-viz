@@ -2,7 +2,7 @@
 
 A web app to create information visualization for Kickstarter projects data. Data from [this web crawler](https://webrobots.io/kickstarter-datasets/ "webrockets.io") was optimized to a certain schema shown at the end. This is part of a group project at UMSI si649 w18 curriculum.
 
-<a href="https://cdn.rawgit.com/navdeepsb/kickstarter-data-viz/v2/sailorswheel.html" title="v2 - Kickstarter projects data visualization" target="_blank">Live demo of v2</a><br />
+<a href="https://rawgit.com/navdeepsb/kickstarter-data-viz/v2/sailorswheel.html" title="v2 - Kickstarter projects data visualization" target="_blank">Live demo of v2</a><br />
 
 <img src="./_iterations/v2-01.png" />
 
