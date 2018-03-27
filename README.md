@@ -2,6 +2,13 @@
 
 A web app to create information visualization for Kickstarter projects data. Data from [this web crawler](https://webrobots.io/kickstarter-datasets/ "webrockets.io") was optimized to a certain schema shown at the end. This is part of a group project at UMSI si649 w18 curriculum.
 
+<a href="https://cdn.rawgit.com/navdeepsb/kickstarter-data-viz/v2/sailorswheel.html" title="v2 - Kickstarter projects data visualization" target="_blank">Live demo of v2</a><br />
+
+<img src="./_iterations/v2-01.png" />
+
+_This demo contains 2,000 projects extracted from a JSON stream containing projects till Jan 2018._
+
+
 <br /><br />
 
 #### Data encoding
@@ -10,7 +17,11 @@ A web app to create information visualization for Kickstarter projects data. Dat
 - __Month of launch date__: angle (each sector will represent one month)
 - __Sentiment score of blurb__: angle offset within a month sector
 
+
+Each data point has two polar coordinates: `( r, A )`, where `r` is the radial distance from the center. In this case, the % goal pledged with zero starting on the circumference of the inner most circle). And `A` is the angle (starting in the first quadrant with positive clockwise rotation) making January occupy the 3 o'clock position and successive months falling on other clock positions. This angle also has an offset associated with it related to the sentiment score which ranges from -1 to +1 making the offset angle range from -15 to +15 degrees in a single month sector. So, within each sector, data points towards the left-side of the sector point to a sentiment score towards -1 and the right-side point to a +1.
+
 <br /><br />
+
 
 #### Datum schema
 ```json
@@ -37,4 +48,5 @@ A web app to create information visualization for Kickstarter projects data. Dat
     "slug": "represent-the-strange-and-unusual"
 }
 ```
+
 
