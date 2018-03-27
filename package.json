@@ -4,7 +4,7 @@
   "description": "A web app to create information visualization for Kickstarter projects data for si649's academic group project, winter '18",
   "main": "js/main.js",
   "scripts": {
-    "start": "clear && python -m SimpleHTTPServer 19019"
+    "start": "clear && python -m SimpleHTTPServer 19093"
   },
   "repository": {
     "type": "git",
