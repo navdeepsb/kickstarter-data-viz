@@ -56,6 +56,7 @@ $.getJSON( dataFile, ( data, msg ) => {
     let offsetAngle = null;
     let thisCatg = null;
     let currCatg = location.href.split( "filter=" )[ 1 ];
+    let startTime = Date.now();
 
     for( let i = 0, len = data.length; i < len; i++ ) {
         d = data[ i ];
@@ -68,29 +69,32 @@ $.getJSON( dataFile, ( data, msg ) => {
         monthIdx = window.parseInt( d.launch_date.substr( 5, 2 ) ) - 1;
         offsetAngle = ( monthIdx / 12 * 360 ) + ( showOffset ? d.score * 15 : 0 );
 
-        pointElem = document.createElementNS( SVG_NS, "circle" );
-        pointElem.classList.add( "path", "path--point", thisCatg );
-        pointElem.setAttribute( "cx", 250 );
-        pointElem.setAttribute( "cy", 250 );
-        pointElem.setAttribute( "r", pointRadius );
-        pointElem.setAttribute( "data-info", JSON.stringify( d ) );
-        pointElem.setAttribute( "transform", `
-            rotate(${ window.isNaN( offsetAngle ) ? 0 : offsetAngle } 250,250)
-            translate(${ innerCircleRadius + Math.round( d.perc_pledged )} 0)
-            ` );
-        pointElem.addEventListener( "mouseover", showTip );
-        pointElem.addEventListener( "mouseleave", hideTip );
+        try {
+            pointElem = document.createElementNS( SVG_NS, "circle" );
+            pointElem.classList.add( "path", "path--point", thisCatg );
+            pointElem.setAttribute( "cx", 250 );
+            pointElem.setAttribute( "cy", 250 );
+            pointElem.setAttribute( "r", pointRadius );
+            pointElem.setAttribute( "data-info", JSON.stringify( d ) );
+            pointElem.setAttribute( "transform", `
+                rotate(${ window.isNaN( offsetAngle ) ? 0 : offsetAngle } 250,250)
+                translate(${ innerCircleRadius + Math.round( d.perc_pledged )} 0)
+                ` );
+            pointElem.addEventListener( "mouseover", showTip );
+            pointElem.addEventListener( "mouseleave", hideTip );
 
-        dataElem.appendChild( pointElem );
+            dataElem.appendChild( pointElem );
 
-        // Aggregate categories:
-        if( !categories.hasOwnProperty( d.category_name ) ) {
-            categories[ d.category_name ] = 0;
-        }
-        categories[ d.category_name ] += 1;
+            // Aggregate categories:
+            if( !categories.hasOwnProperty( d.category_name ) ) {
+                categories[ d.category_name ] = 0;
+            }
+            categories[ d.category_name ] += 1;
+
+        } catch( ex ) {}
     }
 
-    loaderElem.innerText = "Hover over each dot to view details...";
+    loaderElem.innerText = "Hover over each project to view details...";
     console.log( categories );
 
     // Show filters:
@@ -105,6 +109,8 @@ $.getJSON( dataFile, ( data, msg ) => {
         li.appendChild( link );
         filtersElem.appendChild( li );
     });
+
+    console.log( "Time taken:\n" + ( ( Date.now() - startTime ) / 1000 ) + " seconds." )
 });
 
 
