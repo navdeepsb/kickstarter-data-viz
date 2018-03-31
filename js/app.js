@@ -34,7 +34,7 @@ Object.keys( tipData ).forEach( ( k ) => {
 let showTip = ( e ) => {
     let currInfo = JSON.parse( e.target.getAttribute( "data-info" ) );
     Object.keys( tipData ).forEach( ( k ) => {
-        $( "#" + k ).text( currInfo[ k ] );
+        document.getElementById( k ).innerText = currInfo[ k ];
     });
     tipElem.classList.remove( "hide" );
 };
@@ -49,14 +49,33 @@ let getCategoryClassName = ( s ) => "cat--" + s.replace( " ", "-" ).toLowerCase(
 
 
 // ...
-$.getJSON( dataFile, ( data, msg ) => {
+const request = new XMLHttpRequest();
+request.open( "GET", dataFile, true );
+
+request.onload = () => {
+    if( request.status >= 200 && request.status < 400 ) {
+        // Success!
+        let startTime = Date.now();
+        loadVIz( JSON.parse( request.responseText ) );
+        console.log( "Time taken:\n" + ( ( Date.now() - startTime ) / 1000 ) + " seconds" )
+    } else {
+        // We reached our target server, but it returned an error
+        console.log( "An error occurred..." )
+    }
+};
+
+request.onerror = function() {
+    console.log( "Connection error occurred..." )
+};
+
+request.send();
+let loadVIz = ( data, msg ) => {
     let d = null;
     let pointElem = null;
     let monthIdx = null;
     let offsetAngle = null;
     let thisCatg = null;
     let currCatg = location.href.split( "filter=" )[ 1 ];
-    let startTime = Date.now();
 
     for( let i = 0, len = data.length; i < len; i++ ) {
         d = data[ i ];
@@ -109,8 +128,6 @@ $.getJSON( dataFile, ( data, msg ) => {
         li.appendChild( link );
         filtersElem.appendChild( li );
     });
-
-    console.log( "Time taken:\n" + ( ( Date.now() - startTime ) / 1000 ) + " seconds." )
-});
+};
 
 
