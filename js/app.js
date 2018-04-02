@@ -6,7 +6,7 @@ const dataElem = document.getElementById( "data" );
 const loaderElem = document.getElementById( "loader" );
 const tipElem = document.getElementById( "tooltip" );
 const filtersElem = document.getElementById( "filters" );
-const showOffset = true;
+const offsetCheckElem = document.getElementById( "showOffsetCheck" );
 const dataFile = "data/final-data-opt-2000rec.min.json";
 const tipData = {
     "name": "Name",
@@ -20,6 +20,7 @@ const tipData = {
 
 
 // ...
+let showOffset = offsetCheckElem.value;
 let tipInfo = null;
 Object.keys( tipData ).forEach( ( k ) => {
     tipInfo = document.createElement( "div" );
@@ -73,7 +74,9 @@ let loadVIz = ( data, msg ) => {
     let d = null;
     let pointElem = null;
     let monthIdx = null;
+    let monthAngle = null;
     let offsetAngle = null;
+    let percPledged = null;
     let thisCatg = null;
     let currCatg = location.href.split( "filter=" )[ 1 ];
 
@@ -86,7 +89,9 @@ let loadVIz = ( data, msg ) => {
         }
 
         monthIdx = window.parseInt( d.launch_date.substr( 5, 2 ) ) - 1;
-        offsetAngle = ( monthIdx / 12 * 360 ) + ( showOffset ? d.score * 15 : 0 );
+        offsetAngle = showOffset ? d.score * 15 : 0;
+        monthAngle = ( monthIdx / 12 * 360 );
+        percPledged = Math.round( d.perc_pledged );
 
         try {
             pointElem = document.createElementNS( SVG_NS, "circle" );
@@ -95,9 +100,12 @@ let loadVIz = ( data, msg ) => {
             pointElem.setAttribute( "cy", 250 );
             pointElem.setAttribute( "r", pointRadius );
             pointElem.setAttribute( "data-info", JSON.stringify( d ) );
+            pointElem.setAttribute( "data-month-angle", monthAngle );
+            pointElem.setAttribute( "data-offset-angle", offsetAngle );
+            pointElem.setAttribute( "data-perc-pledged", percPledged );
             pointElem.setAttribute( "transform", `
-                rotate(${ window.isNaN( offsetAngle ) ? 0 : offsetAngle } 250,250)
-                translate(${ innerCircleRadius + Math.round( d.perc_pledged )} 0)
+                rotate(${ window.isNaN( monthAngle + offsetAngle ) ? 0 : monthAngle + offsetAngle } 250,250)
+                translate(${ innerCircleRadius + percPledged } 0)
                 ` );
             pointElem.addEventListener( "mouseover", showTip );
             pointElem.addEventListener( "mouseleave", hideTip );
@@ -110,7 +118,10 @@ let loadVIz = ( data, msg ) => {
             }
             categories[ d.category_name ] += 1;
 
-        } catch( ex ) {}
+        } catch( ex ) {
+            console.log( "Exception occurred!" );
+            console.log( ex.toString() );
+        }
     }
 
     loaderElem.innerText = "Hover over each project to view details...";
@@ -131,3 +142,21 @@ let loadVIz = ( data, msg ) => {
 };
 
 
+let toggleSentimentOffset = () => {
+    showOffset = !showOffset;
+
+    let ma = oa = pp = null;
+
+    Array.prototype.forEach.call( document.getElementsByClassName( "path--point" ), ( pt ) => {
+        ma = window.parseInt( pt.getAttribute( "data-month-angle"  ), 10 );
+        oa = showOffset ? window.parseInt( pt.getAttribute( "data-offset-angle" ), 10 ) : 0;
+        pp = window.parseInt( pt.getAttribute( "data-perc-pledged" ), 10 );
+
+        pt.setAttribute( "transform", `
+            rotate(${ window.isNaN( ma + oa ) ? 0 : ma + oa } 250,250)
+            translate(${ innerCircleRadius + pp } 0)
+            ` );
+    });
+};
+
+offsetCheckElem.addEventListener( "change", toggleSentimentOffset );
