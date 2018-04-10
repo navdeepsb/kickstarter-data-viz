@@ -53,7 +53,7 @@ svg {
     stroke-width: 6;
 }
 .path__point--hidden {
-    opacity: 0;
+    display: none;
 }
 
 .hide {
