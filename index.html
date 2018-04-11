@@ -46,11 +46,16 @@
             <p>Filters</p>
             <input type="checkbox" id="showOffsetCheck" checked="checked" />
             <label for="showOffsetCheck">Encode sentiment score?</label>
+            <br />
+            <input type="checkbox" id="anchorMonthCheck" />
+            <label for="anchorMonthCheck">Anchor to focused month?</label>
         </div>
 
         <div>
-            <p>Anchored month</p>
-            <select name="monthSelector" id="monthSelector"></select>
+            <p>Month to focus on</p>
+            <select name="monthSelector" id="monthSelector">
+                <option value="-1">None</option>
+            </select>
         </div>
 
         <div>

@@ -8,6 +8,7 @@ const loaderElem = document.getElementById( "loader" );
 const tipElem = document.getElementById( "tooltip" );
 const filtersElem = document.getElementById( "filters" );
 const offsetCheckElem = document.getElementById( "showOffsetCheck" );
+const anchorCheckElem = document.getElementById( "anchorMonthCheck" );
 const monthSelectorElem = document.getElementById( "monthSelector" );
 const activeMonthElem = document.getElementById( "activeMonth" );
 const dataFile = "data/final-data-opt-2000rec.min.json";
@@ -32,7 +33,6 @@ let categories = {};
 let categoriesToShow = [];
 let pointElems = [];
 let showOffset = offsetCheckElem.checked;
-let monthToAnchor = +monthSelectorElem.value;
 let tipInfo = null;
 let showTip = ( e ) => {
     let currInfo = JSON.parse( e.target.getAttribute( "data-info" ) );
@@ -44,7 +44,8 @@ let showTip = ( e ) => {
 let hideTip = ( e ) => {
     tipElem.classList.add( "hide" );
 };
-let getCategoryClassName = ( s ) => "cat--" + s.replace( " ", "-" ).toLowerCase();
+let getCategoryClassName = ( s ) => "path__point--" + s.replace( " ", "-" ).toLowerCase();
+let getMonthClassName    = ( s ) => "path__point--month" + s;
 
 
 // ...
@@ -71,7 +72,7 @@ let getPointToRender = ( datum ) => {
         ` );
     pointElem.addEventListener( "mouseover", showTip );
     pointElem.addEventListener( "mouseleave", hideTip );
-    pointElem.classList.add( "path", "path__point", thisCatg, `path__${ thisCatg }` );
+    pointElem.classList.add( "path", "path__point", thisCatg, `${ getMonthClassName( monthIdx ) }` );
 
     pointElems.push( pointElem );
 
@@ -153,9 +154,24 @@ let toggleSentimentOffset = () => {
             ` );
     });
 };
+let focusSelectedMonthProjects = () => {
+    let mi = +monthSelectorElem.value;
+    const DEFAULT = -1;
+
+    // Show this month:
+    activeMonthElem.innerHTML = months[ mi ] || "";
+
+    // Add/remove `inactive` class to the project points based on month selected:
+    Array.prototype.forEach.call( document.getElementsByClassName( "path__point" ), ( pt ) => {
+        pt.classList.remove( "path__point--inactive" );
+        if( !pt.classList.contains( getMonthClassName( mi ) ) && mi !== DEFAULT ) {
+            pt.classList.add( "path__point--inactive" );
+        }
+    });
+};
 let anchorVizToSelectedMonth = () => {
-    activeMonthElem.innerHTML = months[ +monthSelectorElem.value ];
-    svgElem.setAttribute( "transform", `rotate(${ ( +monthSelectorElem.value / 12 * -360 ) - 90 } 250,250)` );
+    let mi = anchorCheckElem.checked ? +monthSelectorElem.value : 0;
+    svgElem.setAttribute( "transform", `rotate(${ ( ( !( mi + 1 ) ? 0 : mi ) / 12 * -360 ) - 90 } 250,250)` );
 };
 let updateCurrCategories = () => {
     categoriesToShow = [];
@@ -185,9 +201,12 @@ months.forEach( ( m, i ) => {
 });
 
 offsetCheckElem.addEventListener( "change", toggleSentimentOffset );
-monthSelectorElem.addEventListener( "change", anchorVizToSelectedMonth );
+anchorCheckElem.addEventListener( "change", anchorVizToSelectedMonth );
+monthSelectorElem.addEventListener( "change", focusSelectedMonthProjects );
 
 anchorVizToSelectedMonth();
+
+
 
 
 // ...
