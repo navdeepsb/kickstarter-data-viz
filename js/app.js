@@ -46,6 +46,11 @@ let hideTip = ( e ) => {
 };
 let getCategoryClassName = ( s ) => "path__point--" + s.replace( " ", "-" ).toLowerCase();
 let getMonthClassName    = ( s ) => "path__point--month" + s;
+let getPropsToShow = ( d ) => {
+    let _d = {};
+    Object.keys( tipData ).forEach( ( k ) => _d[ k ] = d[ k ] );
+    return _d;
+};
 
 
 // ...
@@ -61,7 +66,7 @@ let getPointToRender = ( datum ) => {
     pointElem.setAttribute( "cx", 250 );
     pointElem.setAttribute( "cy", 250 );
     pointElem.setAttribute( "r", pointRadius );
-    pointElem.setAttribute( "data-info", JSON.stringify( datum ) );
+    pointElem.setAttribute( "data-info", JSON.stringify( getPropsToShow( datum ) ) );
     pointElem.setAttribute( "data-month-angle", monthAngle );
     pointElem.setAttribute( "data-offset-angle", datum.score * 15 );
     pointElem.setAttribute( "data-perc-pledged", percPledged );
