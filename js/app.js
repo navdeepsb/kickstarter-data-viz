@@ -1,6 +1,8 @@
 // ...
 const pointRadius = 1.5;
 const innerCircleRadius = 50;
+const VIZ_W = 500;
+const VIZ_H = 500;
 const SVG_NS = "http://www.w3.org/2000/svg";
 const svgElem = document.getElementById( "main" );
 const dataElem = document.getElementById( "data" );
@@ -44,7 +46,7 @@ let showTip = ( e ) => {
 let hideTip = ( e ) => {
     tipElem.classList.add( "hide" );
 };
-let getCategoryClassName = ( s ) => "path__point--" + s.replace( " ", "-" ).toLowerCase();
+let getCategoryClassName = ( s ) => "path__point--cat" + Object.keys( categories ).indexOf( s );
 let getMonthClassName    = ( s ) => "path__point--month" + s;
 let getPropsToShow = ( d ) => {
     let _d = {};
@@ -58,7 +60,7 @@ let getPointToRender = ( datum ) => {
     let pointElem   = null;
     let thisCatg    = getCategoryClassName( datum.category_name );
     let monthIdx    = +datum.launch_date.substr( 5, 2 ) - 1;;
-    let monthAngle  = ( monthIdx / 12 * 360 );
+    let monthAngle  = monthIdx / 12 * 360;
     let offsetAngle = showOffset ? datum.score * 15 : 0;
     let percPledged = Math.round( datum.perc_pledged );
 
@@ -105,14 +107,14 @@ let loadVIz = ( data ) => {
         let d = data[ i ];
         let c = d.category_name;
 
-        // Append the data point to DOM:
-        dataElem.appendChild( getPointToRender( d ) );
-
         // Aggregate categories:
         if( !categories.hasOwnProperty( c ) ) {
             categories[ c ] = 0;
         }
         ++categories[ c ];
+
+        // Append the data point to DOM:
+        dataElem.appendChild( getPointToRender( d ) );
     }
 
     // Make filters:
