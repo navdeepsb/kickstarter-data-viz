@@ -1,11 +1,11 @@
 // ...
 const pointRadius = 2.5;
 const W = window.innerWidth;
-const H = 800;
+const H = 840;
 const hc = W / 2;
 const vc = H / 2;
 const AXIS_LEN = H - 100;
-const innerCircleRadius = 50;
+const innerCircleRadius = 75;
 const SVG_NS = "http://www.w3.org/2000/svg";
 const svgElem = document.getElementById( "svg" );
 const mainGrpElem = document.getElementById( "main" );
@@ -19,11 +19,14 @@ const monthSelectorElem = document.getElementById( "monthSelector" );
 const activeMonthElem = document.getElementById( "activeMonth" );
 const sidebarElem = document.getElementById( "sidebar" );
 const sidebarCTA = document.querySelector( "#sidebar__cta a" );
-const dataFile = "data/final-data-opt-2000rec.min.json";
+const filterImgElem = document.querySelector( "img.filter" );
+const dataFile = "data/final-data-opt-photography-4301rec.min.json";
+// const dataFile = "data/final-data-opt-2000rec.min.json";
 const tipData = {
     "name": "Name",
     "category_name": "Category",
     "launch_date": "Launched on",
+    "backers_count": "# of backers",
     "goal": "Goal",
     "pledged": "Pledged",
     "perc_pledged": "% pledged",
@@ -72,10 +75,11 @@ let getPropsToShow = ( d ) => {
 let getPointToRender = ( datum ) => {
     let pointElem   = null;
     let thisCatg    = getCategoryClassName( datum.category_name );
-    let monthIdx    = +datum.launch_date.substr( 5, 2 ) - 1;;
+    let monthIdx    = +datum.launch_date.substr( 5, 2 ) - 1 || 0;
     let monthAngle  = monthIdx / 12 * 360;
-    let offsetAngle = showOffset ? datum.score * 15 : 0;
-    let percPledged = Math.round( datum.perc_pledged );
+    let sentimentScore = datum.score = Math.round( datum.score * 100 ) / 100;
+    let offsetAngle = showOffset ? sentimentScore * 15 : 0;
+    let percPledged = datum.perc_pledged = Math.round( datum.perc_pledged );
 
     pointElem = document.createElementNS( SVG_NS, "circle" );
     pointElem.setAttribute( "cx", hc );
@@ -83,7 +87,7 @@ let getPointToRender = ( datum ) => {
     pointElem.setAttribute( "r", pointRadius );
     pointElem.setAttribute( "data-info", JSON.stringify( getPropsToShow( datum ) ) );
     pointElem.setAttribute( "data-month-angle", monthAngle );
-    pointElem.setAttribute( "data-offset-angle", datum.score * 15 );
+    pointElem.setAttribute( "data-offset-angle", sentimentScore * 15 );
     pointElem.setAttribute( "data-perc-pledged", percPledged );
     pointElem.setAttribute( "data-cat", thisCatg );
     pointElem.setAttribute( "transform", `
@@ -225,12 +229,11 @@ monthSelectorElem.addEventListener( "change", focusSelectedMonthProjects );
 
 
 // ...
-let isSidebarShown = false;
-const sidebarW = sidebarElem.offsetWidth;
+let isSidebarShown = true;
 sidebarCTA.addEventListener( "click", ( e ) => {
     e.preventDefault();
-    sidebarElem.style.right = ( isSidebarShown ? ( -1 * sidebarW ) : 0 ) + "px";
-    e.target.querySelector( "img" ).src = `img/filter${ !isSidebarShown ? "-filled": "" }.svg`
+    sidebarElem.style.right = ( isSidebarShown ? 0 : ( -1 * sidebarElem.offsetWidth ) ) + "px";
+    filterImgElem.src = `img/filter${ isSidebarShown ? "-filled" : "" }.svg`;
     isSidebarShown = !isSidebarShown;
 });
 

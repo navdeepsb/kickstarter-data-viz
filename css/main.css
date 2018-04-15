@@ -101,15 +101,13 @@ p {
 .path__point {
     fill: #00b8a9;
     stroke: #00b8a9;
-    transition: transform 0.3s;
+    transition: all 0.3s;
 }
 .path__point:not( .path__point--inactive ) { cursor: pointer }
 .path__point:not( .path__point--inactive ):hover { stroke-width: 7 }
 .path__point--hidden { display: none }
 
 #sidebar, #sidebar__cta {
-    /*color: #eee;*/
-    background: rgba( 0, 0, 0, 0.7 );
     background: #fdfcf6;
     border: 1px solid #dbdbdb;
     border-right: 0;

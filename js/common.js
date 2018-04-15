@@ -15,9 +15,6 @@ let navigateTo = ( screenId ) => {
         if( "#" + sect.id === screenId ) {
             sect.classList.add( "active" );
         }
-
-        // Hide the header for the final viz screen:
-        // header.classList[ screenId === "#screen-4" ? "add" : "remove" ]( "hide" );
     });
 };
 
