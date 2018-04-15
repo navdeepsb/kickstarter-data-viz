@@ -64,8 +64,8 @@ p {
 
 
 /*** UTIL ***/
-.successful { color: #82c341 }
-.failed { color: #e34b48 }
+.successful { color: #82c341; color: #3cb44b }
+.failed { color: #e34b48; color: #e51b4c }
 .hide { display: none }
 
 
@@ -76,8 +76,8 @@ p {
 .bars { width: 65% }
 .bar__selector { width: 5%; text-align: right; display: none; padding-right: 3px }
 .bar { height: 10px; margin: 10px 0 }
-.bar--successful { background: #82c341 }
-.bar--failed { background: #e34b48 }
+.bar--successful { background: #82c341; background: #3cb44b }
+.bar--failed { background: #e34b48; background: #e51b4c }
 .bar__group { border-radius: 3px; cursor: pointer }
 .bar__group:hover { background: #ebebeb }
 .bar__group:hover .bar__title { font-weight: bold }
