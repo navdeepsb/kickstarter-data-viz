@@ -22,7 +22,7 @@ const loadBars = ( data ) => {
                     </span>
                 </div><!--
                 --><div class="bar__selector">
-                    <img src="img/chevron-thick.svg" alt="Analyze the ${ k } category" width="10" />
+                    <img src="img/chevron-right.svg" alt="Analyze the ${ k } category" width="10" />
                 </div>
             </div>
         `;

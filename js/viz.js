@@ -8,17 +8,18 @@ const AXIS_LEN = H - 100;
 const innerCircleRadius = 50;
 const SVG_NS = "http://www.w3.org/2000/svg";
 const svgElem = document.getElementById( "svg" );
+const mainGrpElem = document.getElementById( "main" );
 const axesGrpElem = document.getElementById( "axes" );
-const dataElem = document.getElementById( "data" );
+const dataGrpElem = document.getElementById( "data" );
 const tipElem = document.getElementById( "tooltip" );
 const filtersElem = document.getElementById( "filters" );
 const offsetCheckElem = document.getElementById( "showOffsetCheck" );
 const anchorCheckElem = document.getElementById( "anchorMonthCheck" );
 const monthSelectorElem = document.getElementById( "monthSelector" );
 const activeMonthElem = document.getElementById( "activeMonth" );
-// const dataFile = "data/final-data-opt-photography-4301rec.min.json";
+const sidebarElem = document.getElementById( "sidebar" );
+const sidebarCTA = document.getElementById( "sidebar__cta" );
 const dataFile = "data/final-data-opt-2000rec.min.json";
-// const dataFile = "sample/final-data-opt-30rec.min.json";
 const tipData = {
     "name": "Name",
     "category_name": "Category",
@@ -42,6 +43,8 @@ let pointElems = [];
 let showOffset = offsetCheckElem.checked;
 let tipInfo = null;
 let showTip = ( e ) => {
+    if( e.target.classList.contains( "path__point--inactive" ) ) return;
+
     let currInfo = JSON.parse( e.target.getAttribute( "data-info" ) );
     Object.keys( tipData ).forEach( ( k ) => {
         document.getElementById( k ).innerText = currInfo[ k ];
@@ -119,7 +122,7 @@ let loadVIz = ( data ) => {
         ++categories[ c ];
 
         // Append the data point to DOM:
-        dataElem.appendChild( getPointToRender( d ) );
+        dataGrpElem.appendChild( getPointToRender( d ) );
     }
 
     // Make filters:
@@ -153,7 +156,7 @@ let toggleSentimentOffset = () => {
 
     let ma = oa = pp = null;
     Array.prototype.forEach.call( document.getElementsByClassName( "path__point" ), ( pt ) => {
-        ma = +pt.getAttribute( "data-month-angle"  );
+        ma = +pt.getAttribute( "data-month-angle" );
         oa = showOffset ? +pt.getAttribute( "data-offset-angle" ) : 0;
         pp = +pt.getAttribute( "data-perc-pledged" );
 
@@ -180,7 +183,7 @@ let focusSelectedMonthProjects = () => {
 };
 let anchorVizToSelectedMonth = () => {
     let mi = anchorCheckElem.checked ? +monthSelectorElem.value : 0;
-    axesGrpElem.setAttribute( "transform", `rotate(${ ( ( !( mi + 1 ) ? 0 : mi ) / 12 * -360 ) - 90 } 250,250)` );
+    axesGrpElem.setAttribute( "transform", `rotate(${ ( ( !( mi + 1 ) ? 0 : mi ) / 12 * -360 ) - 90 } ${ hc },${ vc })` );
 };
 let updateCurrCategories = () => {
     categoriesToShow = [];
@@ -215,10 +218,24 @@ monthSelectorElem.addEventListener( "change", focusSelectedMonthProjects );
 
 
 // ...
+let isSidebarShown = false;
+const sidebarW = sidebarElem.offsetWidth;
+sidebarCTA.addEventListener( "click", ( e ) => {
+    e.preventDefault();
+    sidebarElem.style.right = ( isSidebarShown ? ( -1 * sidebarW ) : 0 ) + "px";
+    e.target.src = `img/filter${ !isSidebarShown ? "-filled": "" }.svg`
+    isSidebarShown = !isSidebarShown;
+});
+
+
+// ...
 svgElem.setAttribute( "width",  W + "px" );
 svgElem.setAttribute( "height", H + "px" );
 svgElem.setAttribute( "viewBox", `0 0 ${ W } ${ H }` );
 loadFile( dataFile, loadVIz );
+
+// Offset the axis so the first month aligns to the vertical axis:
+mainGrpElem.setAttribute( "transform", `rotate(-90 ${ hc },${ vc })`);
 
 axesGrpElem.innerHTML = `
     <g class="axes">
