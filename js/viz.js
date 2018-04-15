@@ -1,11 +1,11 @@
 // ...
-const pointRadius = 2;
+const pointRadius = 2.5;
 const W = window.innerWidth;
 const H = 800;
 const hc = W / 2;
 const vc = H / 2;
 const AXIS_LEN = H - 100;
-const innerCircleRadius = 65;
+const innerCircleRadius = 50;
 const SVG_NS = "http://www.w3.org/2000/svg";
 const svgElem = document.getElementById( "svg" );
 const axesGrpElem = document.getElementById( "axes" );
@@ -129,7 +129,7 @@ let loadVIz = ( data ) => {
     Object.keys( categories ).forEach( ( c ) => {
         ct = getCategoryClassName( c );
         li = document.createElement( "li" );
-        li.classList.add( "filter", ct );
+        li.classList.add( "filter", "path__point--cat", ct );
         li.innerHTML = `
             <input type="checkbox" id="${ ct }" checked="checked" data-cat="${ ct }" />
             <label for="${ ct }">${ c } (${ categories[ c ] })</label>
