@@ -1,51 +1,102 @@
+/*** RESET ***/
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     padding: 0;
     font-family: "Source Sans Pro", sans-serif;
-    color: #eee;
-    background: #333;
-    text-align: center;
+    color: #034752;
+    background: #f5f5f5;
 }
 
-#container {
-    width: 500px;
-    margin: 60px 20px 60px 0;
+p {
+    line-height: 1.5;
+}
+
+
+/*** COMMON ***/
+.container {
+    max-width: 50em;
+    margin: 0 auto;
+}
+
+.header {
+    padding-top: 60px;
+}
+.header h1 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 3rem;
+    margin: 0;
+}
+.header h2.subtitle {
+    font-weight: normal;
+    font-size: 1.2rem;
+}
+.header p {
+}
+
+.viz {
+    padding: 80px 0;
+}
+
+.section { margin-top: 30px; display: none }
+.section.active { display: block }
+.subsection { padding: 30px 0 }
+
+.btn {
+    color: #fff;
+    background: #034752;
     display: inline-block;
+    margin-right: 10px;
+    padding: 15px 20px;
+    text-decoration: none;
+    border-radius: 4px;
 }
+.btn:hover { background: #333333 }
+.btn__back {
+    color: #555;
+    background: #dbdbdb;
+}
+.btn__back:hover { background: #ebebeb }
 
-#sidebar {
-    width: 210px;
-    margin: 60px 0 60px 20px;
-    display: inline-block;
-    vertical-align: top;
-    text-align: left;
-}
-#sidebar p {
-    margin-top: 0;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-}
-#sidebar > div {
-    margin-top: 30px;
-}
-#sidebar > div:first-child {
-    margin-top: 0;
-}
 
-svg {
-    display: block;
-    border: 1px solid #999999;
-}
+/*** UTIL ***/
+.successful { color: #82c341 }
+.failed { color: #e34b48 }
+.hide { display: none }
 
+
+/*** SCREEN 02 ***/
+.bar__title, .bars, .bar { display: inline-block; vertical-align: middle }
+.bar__title-detail { display: none }
+.bar__title { width: 30%; padding-left: 10px }
+.bars { width: 65% }
+.bar__selector { width: 5%; text-align: right; display: none; padding-right: 3px }
+.bar { height: 10px; margin: 10px 0 }
+.bar--successful { background: #82c341 }
+.bar--failed { background: #e34b48 }
+.bar__group { border-radius: 3px; cursor: pointer }
+.bar__group:hover { background: #ebebeb }
+.bar__group:hover .bar__title { font-weight: bold }
+.bar__group:hover .bar__title-detail { display: inline }
+.bar__group:hover .bar__selector { display: inline-block }
+
+
+/*** SCREEN 03 ***/
+/*** TODO ***/
+
+
+/*** SCREEN 04 ***/
 .path {
-    stroke: #555555;
+    stroke: #666;
     stroke-width: 0.5;
     fill: none;
 }
-.path--alt { stroke: #666666 }
-.path--blue { stroke: #00b8a9 }
-.path--red { stroke: #e23e57 }
-.path--yellow { stroke: #ff9a00 }
+.path--alt { stroke: #034752 }
+.path--dashed { stroke-dasharray: 3; }
+.path--filled { fill: #f5f5f5 }
 .path__point {
     cursor: pointer;
     fill: #00b8a9;
@@ -57,44 +108,4 @@ svg {
 }
 .path__point--hidden {
     display: none;
-}
-
-.hide {
-    display: none;
-}
-
-#tooltip {
-    margin-top: 20px;
-}
-.row .col {
-    display: inline-block;
-    margin-right: 10px;
-    font-size: 0.8rem;
-    vertical-align: top;
-    text-align: left;
-}
-.row .col:nth-child( 1 ) { width: 30%; }
-.row .col:nth-child( 2 ) { width: 60%; }
-.row .col.col--right {
-    text-align: right;
-    font-weight: bold;
-}
-.row .col p {
-    margin: 0;
-}
-
-ul#filters {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-ul#filters li {
-    padding: 5px 5px 5px 0;
-}
-.filter {
-    color: #00b8a9;
-}
-
-#main {
-    transition: transform 0.3s;
 }

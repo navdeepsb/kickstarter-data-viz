@@ -13,7 +13,8 @@ const offsetCheckElem = document.getElementById( "showOffsetCheck" );
 const anchorCheckElem = document.getElementById( "anchorMonthCheck" );
 const monthSelectorElem = document.getElementById( "monthSelector" );
 const activeMonthElem = document.getElementById( "activeMonth" );
-const dataFile = "data/final-data-opt-2000rec.min.json";
+const dataFile = "data/final-data-opt-photography-4301rec.min.json";
+// const dataFile = "data/final-data-opt-2000rec.min.json";
 const tipData = {
     "name": "Name",
     "category_name": "Category",
@@ -217,25 +218,6 @@ anchorVizToSelectedMonth();
 
 
 // ...
-const request = new XMLHttpRequest();
-request.open( "GET", dataFile, true );
-
-request.onload = () => {
-    if( request.status >= 200 && request.status < 400 ) {
-        // Success!
-        let startTime = Date.now();
-        loadVIz( JSON.parse( request.responseText ) );
-        console.log( "Time taken:\n" + ( ( Date.now() - startTime ) / 1000 ) + " seconds" )
-    } else {
-        // We reached our target server, but it returned an error
-        console.log( "An error occurred..." )
-    }
-};
-
-request.onerror = function() {
-    console.log( "Connection error occurred..." )
-};
-
-request.send();
+loadFile( dataFile, loadVIz );
 
 

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kickstarter Data Visualization | U-M si649 w18</title>
+    <link rel="stylesheet" href="css/galaxy.css">
+    <link rel="stylesheet" href="css/categories.css">
+</head>
+<body>
+
+    <div id="container">
+        <div id="canvas">
+            <svg class="svg" width="500" height="500" viewBox="0 0 500 500">
+                <g id="main">
+                    <g id="axes" transform="rotate(15 250,250)">
+                        <circle class="path" cx="250" cy="250" r="50" />
+                        <circle class="path path--alt" cx="250" cy="250" r="150" stroke-dasharray="5" />
+                        <path class="path path--alt" d="M250,50 v400" />
+                        <path class="path path--alt" d="M250,50 v400" transform="rotate( 90 250,250)" />
+                        <path class="path path--alt" d="M250,50 v400" transform="rotate( 30 250,250)" />
+                        <path class="path path--alt" d="M250,50 v400" transform="rotate(-30 250,250)" />
+                        <path class="path path--alt" d="M250,50 v400" transform="rotate( 60 250,250)" />
+                        <path class="path path--alt" d="M250,50 v400" transform="rotate(-60 250,250)" />
+                   </g><!-- #axes -->
+                    <g id="axes2">
+                        <path class="path" d="M250,50 v400" stroke-dasharray="5" />
+                        <path class="path" d="M250,50 v400" transform="rotate( 90 250,250)" stroke-dasharray="5" />
+                        <path class="path" d="M250,50 v400" transform="rotate( 30 250,250)" stroke-dasharray="5" />
+                        <path class="path" d="M250,50 v400" transform="rotate(-30 250,250)" stroke-dasharray="5" />
+                        <path class="path" d="M250,50 v400" transform="rotate( 60 250,250)" stroke-dasharray="5" />
+                        <path class="path" d="M250,50 v400" transform="rotate(-60 250,250)" stroke-dasharray="5" />
+                   </g><!-- #axes2 -->
+                   <g id="data"></g><!-- #data -->
+                </g>
+               <text id="activeMonth" x="250" y="30" fill="#fff" font-size="0.8rem" text-anchor="middle"></text>
+            </svg><!-- #main -->
+
+            <p id="loader">Loading...</p><!-- #loader -->
+
+            <div id="tooltip" class="hide"></div><!-- #tooltip -->
+        </div><!-- #canvas -->
+    </div><!-- #container -->
+
+    <div id="sidebar">
+        <div>
+            <p>Filters</p>
+            <input type="checkbox" id="showOffsetCheck" checked="checked" />
+            <label for="showOffsetCheck">Encode sentiment score?</label>
+            <br />
+            <input type="checkbox" id="anchorMonthCheck" />
+            <label for="anchorMonthCheck">Anchor to focused month?</label>
+        </div>
+
+        <div>
+            <p>Month to focus on</p>
+            <select name="monthSelector" id="monthSelector">
+                <option value="-1">None</option>
+            </select>
+        </div>
+
+        <div>
+            <p>Categories</p>
+            <ul id="filters"></ul>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/galaxy.poc.js"></script>
+</body>
+</html>
