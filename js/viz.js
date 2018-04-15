@@ -45,18 +45,41 @@ let categoriesToShow = [];
 let pointElems = [];
 let showOffset = offsetCheckElem.checked;
 let tipInfo = null;
+let colors = [
+    { "val": "rgb(230,  25,  75)", "hex": "#e6194b" },
+    { "val": "rgb( 60, 180,  75)", "hex": "#3cb44b" },
+    { "val": "rgb(255, 225,  25)", "hex": "#ffe119", isLowContrast: true },
+    { "val": "rgb(  0, 130, 200)", "hex": "#0082c8" },
+    { "val": "rgb(245, 130,  48)", "hex": "#f58231" },
+    { "val": "rgb(145,  30, 180)", "hex": "#911eb4" },
+    { "val": "rgb( 70, 240, 240)", "hex": "#46f0f0", isLowContrast: true },
+    { "val": "rgb(240,  50, 230)", "hex": "#f032e6" },
+    { "val": "rgb(210, 245,  60)", "hex": "#d2f53c", isLowContrast: true },
+    { "val": "rgb(250, 190, 190)", "hex": "#fabebe" },
+    { "val": "rgb(  0, 128, 128)", "hex": "#008080" },
+    { "val": "rgb(230, 190, 255)", "hex": "#e6beff", isLowContrast: true },
+    { "val": "rgb(170, 110,  40)", "hex": "#aa6e28" },
+    { "val": "rgb(255, 250, 200)", "hex": "#fffac8", isLowContrast: true },
+    { "val": "rgb(128,   0,   0)", "hex": "#800000" },
+    { "val": "rgb(170, 255, 195)", "hex": "#aaffc3", isLowContrast: true },
+    { "val": "rgb(128, 128,   0)", "hex": "#808000" },
+    { "val": "rgb(255, 215, 180)", "hex": "#ffd8b1", isLowContrast: true },
+    { "val": "rgb(  0,   0, 128)", "hex": "#000080" },
+    { "val": "rgb(128, 128, 128)", "hex": "#808080" }
+];
 let showTip = ( e ) => {
     if( e.target.classList.contains( "path__point--inactive" ) ) return;
-
-    let bkg = window.getComputedStyle( e.target, null ).getPropertyValue( "fill" );
 
     let currInfo = JSON.parse( e.target.getAttribute( "data-info" ) );
     Object.keys( tipData ).forEach( ( k ) => {
         document.getElementById( k ).innerText = currInfo[ k ];
     });
+    let catgIdx = Array.prototype.filter.call( e.target.classList, c => { return c.indexOf( "path__point--cat" ) >= 0 })[ 0 ].split( "path__point--cat" )[ 1 ];
+    let color = colors[ catgIdx ];
     tipElem.style.left = e.clientX + 20 + "px";
     tipElem.style.top = e.clientY - 140 + "px";
-    tipElem.style.background = bkg.substr( 0, bkg.length - 2 ) + ", 0.9)";
+    tipElem.style.background = color.val.substr( 0, color.val.length - 2 ) + ", 0.9)";
+    tipElem.style.color = color.isLowContrast ? "#333" : "#eee";
     tipElem.classList.remove( "hide" );
 };
 let hideTip = ( e ) => {
