@@ -147,3 +147,17 @@ ul#filters {
 ul#filters li {
     padding: 5px 0;
 }
+
+#tooltip {
+    color: #eee;
+    background: rgba( 0, 0, 0, 0.75 );
+    position: absolute;
+    width: 450px;
+    padding: 20px;
+    z-index: 3
+}
+#tooltip .row > .col p { margin: 0 }
+#tooltip .row > .col { display: inline-block; vertical-align: top }
+#tooltip .row > .col:first-child { width: 30% }
+#tooltip .row > .col:last-child { width: 70%; padding-left: 7px }
+#tooltip .row > .col.col--right { text-align: right; font-weight: bold }

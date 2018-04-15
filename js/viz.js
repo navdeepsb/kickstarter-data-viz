@@ -18,7 +18,7 @@ const anchorCheckElem = document.getElementById( "anchorMonthCheck" );
 const monthSelectorElem = document.getElementById( "monthSelector" );
 const activeMonthElem = document.getElementById( "activeMonth" );
 const sidebarElem = document.getElementById( "sidebar" );
-const sidebarCTA = document.getElementById( "sidebar__cta" );
+const sidebarCTA = document.querySelector( "#sidebar__cta a" );
 const dataFile = "data/final-data-opt-2000rec.min.json";
 const tipData = {
     "name": "Name",
@@ -45,10 +45,15 @@ let tipInfo = null;
 let showTip = ( e ) => {
     if( e.target.classList.contains( "path__point--inactive" ) ) return;
 
+    let bkg = window.getComputedStyle( e.target, null ).getPropertyValue( "fill" );
+
     let currInfo = JSON.parse( e.target.getAttribute( "data-info" ) );
     Object.keys( tipData ).forEach( ( k ) => {
         document.getElementById( k ).innerText = currInfo[ k ];
     });
+    tipElem.style.left = e.clientX + 20 + "px";
+    tipElem.style.top = e.clientY - 140 + "px";
+    tipElem.style.background = bkg.substr( 0, bkg.length - 2 ) + ", 0.9)";
     tipElem.classList.remove( "hide" );
 };
 let hideTip = ( e ) => {
@@ -171,6 +176,8 @@ let focusSelectedMonthProjects = () => {
     const DEFAULT = -1;
 
     // Show this month:
+    activeMonthElem.setAttribute( "x", hc );
+    activeMonthElem.setAttribute( "y", 30 );
     activeMonthElem.innerHTML = months[ mi ] || "";
 
     // Add/remove `inactive` class to the project points based on month selected:
@@ -198,8 +205,8 @@ Object.keys( tipData ).forEach( ( k ) => {
     tipInfo = document.createElement( "div" );
     tipInfo.classList.add( "row" );
     tipInfo.innerHTML = `
-        <div class="col col--right"><p>${ tipData[ k ] }:</p></div>
-        <div class="col"><p><span id="${ k }">x</span></p></div>
+        <div class="col col--right"><p>${ tipData[ k ] } :</p></div><!--
+        --><div class="col"><p><span id="${ k }">x</span></p></div>
     `;
 
     tipElem.appendChild( tipInfo );
@@ -223,7 +230,7 @@ const sidebarW = sidebarElem.offsetWidth;
 sidebarCTA.addEventListener( "click", ( e ) => {
     e.preventDefault();
     sidebarElem.style.right = ( isSidebarShown ? ( -1 * sidebarW ) : 0 ) + "px";
-    e.target.src = `img/filter${ !isSidebarShown ? "-filled": "" }.svg`
+    e.target.querySelector( "img" ).src = `img/filter${ !isSidebarShown ? "-filled": "" }.svg`
     isSidebarShown = !isSidebarShown;
 });
 
