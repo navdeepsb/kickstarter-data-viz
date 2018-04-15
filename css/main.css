@@ -104,7 +104,7 @@ p {
     transition: transform 0.3s;
 }
 .path__point:hover {
-    stroke-width: 6;
+    stroke-width: 7;
 }
 .path__point--hidden {
     display: none;

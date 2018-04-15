@@ -1,68 +1,130 @@
-.path__point--cat {
-    fill: #00b8a9;
-    stroke: #00b8a9;
-    color: #00b8a9;
-}
-
-.path__point--cat0 {
-    fill: #e23e57;
-    stroke: #e23e57;
-    color: #e23e57;
-}
-
-.path__point--cat1 {
-    fill: #f9ed69;
-    stroke: #f9ed69;
-    color: #f9ed69;
-}
-
-.path__point--cat2 {
-    fill: #f8f3d4;
-    stroke: #f8f3d4;
-    color: #f8f3d4;
-}
-
-.path__point--cat3 {
-    fill: #9bdd10;
-    stroke: #9bdd10;
-    color: #9bdd10;
-}
-
-.path__point--cat4 {
-    fill: #eeeeee;
-    stroke: #eeeeee;
-    color: #eeeeee;
-}
-
-.path__point--cat5 {
-    fill: #fecea8;
-    stroke: #fecea8;
-    color: #fecea8;
-}
-
-.path__point--cat6 {
-    fill: #dcedc2;
-    stroke: #dcedc2;
-    color: #dcedc2;
-}
-
-.path__point--cat7 {
-    fill: #7e80ff;
-    stroke: #7e80ff;
-    color: #7e80ff;
-}
-
-.path__point--cat8 {
-    fill: #de95ba;
-    stroke: #de95ba;
-    color: #de95ba;
-}
-
-
-
-
-
 .path__point--inactive {
     fill: #555;
     stroke: #555;
+}
+
+.path__point--cat {
+    fill: #000;
+    stroke: #000;
+    color: #000;
+}
+
+.path__point--cat0 {
+    fill: #e51b4c;
+    stroke: #e51b4c;
+    color: #e51b4c;
+}
+
+.path__point--cat1 {
+    fill: #3cb44b;
+    stroke: #3cb44b;
+    color: #3cb44b;
+}
+
+.path__point--cat2 {
+    fill: #fee10f;
+    stroke: #fee10f;
+    color: #fee10f;
+}
+
+.path__point--cat3 {
+    fill: #0c82c6;
+    stroke: #0c82c6;
+    color: #0c82c6;
+}
+
+.path__point--cat4 {
+    fill: #f58230;
+    stroke: #f58230;
+    color: #f58230;
+}
+
+.path__point--cat5 {
+    fill: #863d97;
+    stroke: #863d97;
+    color: #863d97;
+}
+
+.path__point--cat6 {
+    fill: #74cdd8;
+    stroke: #74cdd8;
+    color: #74cdd8;
+}
+
+.path__point--cat7 {
+    fill: #bb55a0;
+    stroke: #bb55a0;
+    color: #bb55a0;
+}
+
+.path__point--cat8 {
+    fill: #d0de42;
+    stroke: #d0de42;
+    color: #d0de42;
+}
+
+.path__point--cat9 {
+    fill: #f9bebe;
+    stroke: #f9bebe;
+    color: #f9bebe;
+}
+
+.path__point--cat10 {
+    fill: #008080;
+    stroke: #008080;
+    color: #008080;
+}
+
+.path__point--cat11 {
+    fill: #d9bddb;
+    stroke: #d9bddb;
+    color: #d9bddb;
+}
+
+.path__point--cat12 {
+    fill: #aa6f29;
+    stroke: #aa6f29;
+    color: #aa6f29;
+}
+
+.path__point--cat13 {
+    fill: #fef9ca;
+    stroke: #fef9ca;
+    color: #fef9ca;
+}
+
+.path__point--cat14 {
+    fill: #7f1416;
+    stroke: #7f1416;
+    color: #7f1416;
+}
+
+.path__point--cat15 {
+    fill: #b5dcb6;
+    stroke: #b5dcb6;
+    color: #b5dcb6;
+}
+
+.path__point--cat16 {
+    fill: #7f8133;
+    stroke: #7f8133;
+    color: #7f8133;
+}
+
+.path__point--cat17 {
+    fill: #fed8b1;
+    stroke: #fed8b1;
+    color: #fed8b1;
+}
+
+.path__point--cat18 {
+    fill: #282973;
+    stroke: #282973;
+    color: #282973;
+}
+
+.path__point--cat19 {
+    fill: #808080;
+    stroke: #808080;
+    color: #808080;
 }

@@ -10,7 +10,6 @@ const SVG_NS = "http://www.w3.org/2000/svg";
 const svgElem = document.getElementById( "svg" );
 const axesGrpElem = document.getElementById( "axes" );
 const dataElem = document.getElementById( "data" );
-const loaderElem = document.getElementById( "loader" );
 const tipElem = document.getElementById( "tooltip" );
 const filtersElem = document.getElementById( "filters" );
 const offsetCheckElem = document.getElementById( "showOffsetCheck" );
@@ -145,9 +144,6 @@ let loadVIz = ( data ) => {
 
     // And update current categories initially:
     updateCurrCategories();
-
-    // Hide the loader:
-    loaderElem.innerText = "Hover over each project to view details...";
 };
 
 
@@ -162,7 +158,7 @@ let toggleSentimentOffset = () => {
         pp = +pt.getAttribute( "data-perc-pledged" );
 
         pt.setAttribute( "transform", `
-            rotate(${ window.isNaN( ma + oa ) ? 0 : ma + oa } 250,250)
+            rotate(${ window.isNaN( ma + oa ) ? 0 : ma + oa } ${ hc },${ vc })
             translate(${ innerCircleRadius + pp } 0)
             ` );
     });
