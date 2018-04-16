@@ -285,7 +285,6 @@ sidebarCTA.addEventListener( "click", ( e ) => {
 svgElem.setAttribute( "width",  W + "px" );
 svgElem.setAttribute( "height", H + "px" );
 svgElem.setAttribute( "viewBox", `0 0 ${ W } ${ H }` );
-loadFile( dataFile, loadVIz );
 
 // Offset the axis so the first month aligns to the vertical axis:
 mainGrpElem.setAttribute( "transform", `rotate(-90 ${ hc },${ vc })`);

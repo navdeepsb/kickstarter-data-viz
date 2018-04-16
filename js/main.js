@@ -1,4 +1,5 @@
 // ...
+const POINTS_LIMIT = 7000;
 let barChart = document.getElementsByClassName( "barchart" )[ 0 ];
 
 
@@ -29,19 +30,30 @@ const loadBars = ( data ) => {
         `;
     });
 };
+
 const onSelectCategory = ( cat, datum ) => {
+    let total = datum.successful + datum.failed;
+
     Array.prototype.forEach.call( document.querySelectorAll( ".master-cat-name" ), span => {
         span.innerText = cat;
     });
 
     Array.prototype.forEach.call( document.querySelectorAll( ".master-cat-num-projs" ), span => {
-        span.innerText = datum.successful + datum.failed;
+        span.innerText = total;
     });
 
-    navigateTo( datum.isSupported ? "#screen-3" : "#screen-5" );
+    if( total <= POINTS_LIMIT ) {
+        navigateTo( "#screen-3" );
+        loadFile( `data/final-data-opt-${ cat.toLowerCase() }.min.json`, loadVIz );
+    }
+    else {
+        navigateTo(  "#screen-5" );
+    }
 }
 
 // ...
 loadFile( "data/categories-success-rate.json", loadBars );
+
+document.getElementById( "num-projects-limit" ).innerText = POINTS_LIMIT;
 
 
