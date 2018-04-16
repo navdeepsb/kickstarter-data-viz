@@ -12,7 +12,7 @@ Array.prototype.forEach.call( navLinks, link => {
 let navigateTo = ( screenId ) => {
     Array.prototype.forEach.call( siteSections, sect => {
         sect.classList.remove( "active" );
-        if( "#" + sect.id === screenId ) {
+        if( "#" + sect.id == screenId ) {
             sect.classList.add( "active" );
         }
     });

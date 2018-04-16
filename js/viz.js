@@ -21,7 +21,8 @@ const focusedMonthElem = document.getElementById( "focusedMonth" );
 const sidebarElem = document.getElementById( "sidebar" );
 const sidebarCTA = document.querySelector( "#sidebar__cta a" );
 const filterImgElem = document.querySelector( "img.filter" );
-const dataFile = "data/final-data-opt-photography-4301rec.min.json";
+const dataFile = "data/final-data-opt-theater-3831rec.min.json";
+// const dataFile = "data/final-data-opt-photography-4301rec.min.json";
 // const dataFile = "data/final-data-opt-2000rec.min.json";
 const tipData = {
     "name": "Name",

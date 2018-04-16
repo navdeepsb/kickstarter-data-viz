@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Kickstarter Data Visualization | U-M si649 w18</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/11.1.0/nouislider.min.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/categories.css">
 </head>
@@ -15,7 +16,7 @@
         </div>
     </header>
 
-    <section id="screen-1" class="section active">
+    <section id="screen-1" class="section">
         <div class="container">
             <div class="subsection">
                 <h3>About</h3>
@@ -48,12 +49,33 @@
         </div><!-- .container -->
     </section><!-- #screen-2 -->
 
-    <section id="screen-3" class="section">
+    <section id="screen-3" class="section active">
         <div class="container">
             <div class="subsection">
                 <h3>Step #2: Configure the expected goal (in USD) for your project</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum dolorem, iste laboriosam minima unde corrupti exercitationem, veniam corporis temporibus neque voluptate esse repudiandae, accusantium laudantium excepturi eaque nihil. Nisi, provident.</p>
-                <p><em>TODO: Show price range slider here</em></p>
+                <p>If you have an idea about the goal you want to reach on Kickstarter, specify a range to see how past projects faired. Overlap the two slider handles for a single value or alternatively, skip this step.</p>
+            </div><!-- .subsection -->
+
+            <div class="subsection">
+                <div class="radio-group">
+                    <div>
+                        <input type="radio" id="skipRange2" name="skipRange" value="false" />
+                        <label for="skipRange2">I have an estimate about the goal for my project</label>
+                        <div class="slider hide">
+                            <div id="slider-margin"></div>
+                            <div id="slider-margin-value-min"></div>
+                            <div id="slider-margin-value-max"></div>
+                            <div id="get-range" class="hide">
+                                <button type="button" id="read-button">Get Range</button>
+                                <div id="range"></div>
+                            </div>
+                        </div><!-- .slider -->
+                    </div><!--
+                    --><div>
+                        <input type="radio" id="skipRange1" name="skipRange" value="true" checked="checked" />
+                        <label for="skipRange1">I would like to skip this step</label>
+                    </div>
+                </div><!-- .radio-group -->
             </div><!-- .subsection -->
 
             <div class="subsection">
@@ -119,8 +141,10 @@
     </section><!-- #screen-4 -->
 
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/11.1.0/nouislider.min.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
-    <script type="text/javascript" src="js/viz.js"></script>
+    <!-- <script type="text/javascript" src="js/viz.js"></script> -->
     <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/slider.js"></script>
 </body>
 </html>
