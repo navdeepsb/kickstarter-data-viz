@@ -13,7 +13,6 @@ body {
     font-family: "Source Sans Pro", sans-serif;
     color: #034752;
     background: #f5f5f5;
-    overflow: hidden;
 }
 
 p {
@@ -46,7 +45,7 @@ p {
     padding: 80px 0;
 }
 
-.section { margin-top: 30px; position: relative; display: none }
+.section { margin-top: 30px; position: relative; overflow: hidden; display: none }
 .section.active { display: block }
 .subsection { padding: 30px 0 }
 
@@ -72,6 +71,7 @@ p {
 .successful { color: #82c341; color: #3cb44b }
 .failed { color: #e34b48; color: #e51b4c }
 .hide { display: none }
+.center { text-align: center }
 
 
 /*** SCREEN 02 ***/
@@ -111,6 +111,15 @@ p {
 .path__point:not( .path__point--inactive ) { cursor: pointer }
 .path__point:not( .path__point--inactive ):hover { stroke-width: 7 }
 .path__point--hidden { display: none }
+#focusedMonth {
+    font-size: 1rem;
+    text-anchor: middle;
+}
+#focusedMonth.active {
+    text-transform: uppercase;
+    font-weight: bold;
+    fill: #666;
+}
 
 #sidebar, #sidebar__cta {
     background: #fdfcf6;

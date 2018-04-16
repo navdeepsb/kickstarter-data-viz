@@ -17,7 +17,7 @@ const filtersElem = document.getElementById( "filters" );
 const offsetCheckElem = document.getElementById( "showOffsetCheck" );
 const anchorCheckElem = document.getElementById( "anchorMonthCheck" );
 const monthSelectorElem = document.getElementById( "monthSelector" );
-const activeMonthElem = document.getElementById( "activeMonth" );
+const focusedMonthElem = document.getElementById( "focusedMonth" );
 const sidebarElem = document.getElementById( "sidebar" );
 const sidebarCTA = document.querySelector( "#sidebar__cta a" );
 const filterImgElem = document.querySelector( "img.filter" );
@@ -190,6 +190,9 @@ let loadVIz = ( data ) => {
 
     // And update current categories initially:
     updateCurrCategories();
+
+    // Hide the loader:
+    focusedMonthElem.classList.add( "hide" );
 };
 
 
@@ -214,9 +217,12 @@ let focusSelectedMonthProjects = () => {
     const DEFAULT = -1;
 
     // Show this month:
-    activeMonthElem.setAttribute( "x", hc );
-    activeMonthElem.setAttribute( "y", 30 );
-    activeMonthElem.innerHTML = months[ mi ] || "";
+    focusedMonthElem.innerHTML = months[ mi ] || "";
+
+    focusedMonthElem.classList.remove( "hide" );
+    if( mi == -1 ) {
+        focusedMonthElem.classList.add( "hide" );
+    }
 
     // Add/remove `inactive` class to the project points based on month selected:
     Array.prototype.forEach.call( document.getElementsByClassName( "path__point" ), ( pt ) => {
@@ -260,6 +266,8 @@ months.forEach( ( m, i ) => {
 offsetCheckElem.addEventListener( "change", toggleSentimentOffset );
 anchorCheckElem.addEventListener( "change", anchorVizToSelectedMonth );
 monthSelectorElem.addEventListener( "change", focusSelectedMonthProjects );
+focusedMonthElem.setAttribute( "x", hc );
+focusedMonthElem.setAttribute( "y", vc + 7 );
 
 
 // ...
