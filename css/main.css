@@ -1,5 +1,5 @@
 /*** GUGGLE FONTS ***/
-@import url( "https://fonts.googleapis.com/css?family=Montserrat:700|Source+Sans+Pro" );
+@import url( "https://fonts.googleapis.com/css?family=Montserrat:700|Source+Sans+Pro:400,700" );
 
 
 /*** RESET ***/
@@ -13,6 +13,7 @@ body {
     font-family: "Source Sans Pro", sans-serif;
     color: #034752;
     background: #f5f5f5;
+    overflow: hidden;
 }
 
 p {
