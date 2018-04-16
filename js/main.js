@@ -9,7 +9,8 @@ const loadBars = ( data ) => {
         let percS = Math.round( ( d.successful / ( d.successful + d.failed ) ) * 100 );
 
         barChart.innerHTML += `
-            <div class="bar__group" titlez="Analyze '${ k }' category" onclick="onSelectCategory( '${ k }' )">
+            <div class="bar__group" titlez="Analyze '${ k }' category"
+                onclick='onSelectCategory( "${ k }", ${ JSON.stringify( d ) } )'>
                 <div class="bars">
                     <div class="bar bar--successful" style="width: ${ percS }%"></div><!--
                     --><div class="bar bar--failed" style="width: ${ 100 - percS }%"></div>
@@ -28,11 +29,16 @@ const loadBars = ( data ) => {
         `;
     });
 };
-const onSelectCategory = ( cat ) => {
-    console.log( cat );
+const onSelectCategory = ( cat, datum ) => {
+    Array.prototype.forEach.call( document.querySelectorAll( ".master-cat-name" ), span => {
+        span.innerText = cat;
+    });
 
+    Array.prototype.forEach.call( document.querySelectorAll( ".master-cat-num-projs" ), span => {
+        span.innerText = datum.successful + datum.failed;
+    });
 
-    navigateTo( "#screen-3" );
+    navigateTo( datum.isSupported ? "#screen-3" : "#screen-5" );
 }
 
 // ...

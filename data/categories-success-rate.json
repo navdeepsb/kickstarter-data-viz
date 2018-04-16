@@ -1,18 +1,18 @@
 {
     "Art"          :{ "successful": 8262,  "failed": 6329 },
     "Comics"       :{ "successful": 4757,  "failed": 1385 },
-    "Crafts"       :{ "successful": 2106,  "failed": 2086 },
-    "Dance"        :{ "successful": 2861,  "failed": 968  },
-    "Design"       :{ "successful": 4306,  "failed": 1027 },
-    "Fashion"      :{ "successful": 4042,  "failed": 2930 },
+    "Crafts"       :{ "successful": 2106,  "failed": 2086, "isSupported": true },
+    "Dance"        :{ "successful": 2861,  "failed": 968, "isSupported": true  },
+    "Design"       :{ "successful": 4306,  "failed": 1027, "isSupported": true },
+    "Fashion"      :{ "successful": 4042,  "failed": 2930, "isSupported": true },
     "Film & Video" :{ "successful": 12871, "failed": 7049 },
     "Food"         :{ "successful": 4246,  "failed": 6133 },
     "Games"        :{ "successful": 6313,  "failed": 2326 },
-    "Journalism"   :{ "successful": 1289,  "failed": 3651 },
+    "Journalism"   :{ "successful": 1289,  "failed": 3651, "isSupported": true },
     "Music"        :{ "successful": 15312, "failed": 6363 },
-    "Photography"  :{ "successful": 2531,  "failed": 1769 },
+    "Photography"  :{ "successful": 2531,  "failed": 1769, "isSupported": true },
     "Publishing"   :{ "successful": 10207, "failed": 3573 },
     "Technology"   :{ "successful": 4924,  "failed": 6123 },
-    "Theater"      :{ "successful": 3148,  "failed": 682  },
-    "Others"       :{ "successful": 526,   "failed": 767  }
+    "Theater"      :{ "successful": 3148,  "failed": 682, "isSupported": true  },
+    "Others"       :{ "successful": 526,   "failed": 767, "isSupported": true  }
 }

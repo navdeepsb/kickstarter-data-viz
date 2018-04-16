@@ -72,6 +72,7 @@ p {
 .failed { color: #e34b48; color: #e51b4c }
 .hide { display: none }
 .center { text-align: center }
+.bold { font-weight: bold }
 
 
 /*** SCREEN 02 ***/
