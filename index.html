@@ -16,7 +16,7 @@
         </div>
     </header>
 
-    <section id="screen-1" class="section">
+    <section id="screen-1" class="section active">
         <div class="container">
             <div class="subsection">
                 <h3>About</h3>
@@ -49,7 +49,7 @@
         </div><!-- .container -->
     </section><!-- #screen-2 -->
 
-    <section id="screen-3" class="section active">
+    <section id="screen-3" class="section">
         <div class="container">
             <div class="subsection">
                 <h3>Step #2: Configure the expected goal (in USD) for your project</h3>
@@ -61,7 +61,7 @@
                     <div>
                         <input type="radio" id="skipRange2" name="skipRange" value="false" />
                         <label for="skipRange2">I have an estimate about the goal for my project</label>
-                        <div class="slider hide">
+                        <div id="slider" class="hide">
                             <div id="slider-margin"></div>
                             <div id="slider-margin-value-min"></div>
                             <div id="slider-margin-value-max"></div>
@@ -143,8 +143,9 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/11.1.0/nouislider.min.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
-    <!-- <script type="text/javascript" src="js/viz.js"></script> -->
-    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/viz.js"></script>
+    <script type="text/javascript" src="js/radio.js"></script>
     <script type="text/javascript" src="js/slider.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

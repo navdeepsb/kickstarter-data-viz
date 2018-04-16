@@ -91,7 +91,11 @@ p {
 
 
 /*** SCREEN 03 ***/
-/*** TODO ***/
+.radio-group > div { display: inline-block; vertical-align: top }
+.radio-group > div:first-child { width: 60%; padding-right: 60px }
+.radio-group > div:last-child  { width: 40% }
+#slider-margin { margin: 60px 0 }
+.noUi-connect { background: #034752 }
 
 
 /*** SCREEN 04 ***/
