@@ -6,6 +6,7 @@ const hc = W / 2;
 const vc = H / 2;
 const AXIS_LEN = H - 100;
 const innerCircleRadius = 75;
+const shouldOpenLinkOnClick = true;
 const SVG_NS = "http://www.w3.org/2000/svg";
 const svgElem = document.getElementById( "svg" );
 const mainGrpElem = document.getElementById( "main" );
@@ -26,11 +27,12 @@ const tipData = {
     "name": "Name",
     "category_name": "Category",
     "launch_date": "Launched on",
+    "create_date": "Created on",
     "backers_count": "# of backers",
     "goal": "Goal",
     "pledged": "Pledged",
     "perc_pledged": "% pledged",
-    "score": "Sentiment score",
+    "score": "Sentiment score"
 };
 const months = [
     "Jan", "Feb", "Mar", "Apr",
@@ -78,8 +80,8 @@ let showTip = ( e ) => {
     let color = colors[ catgIdx ];
     tipElem.style.left = e.clientX + 20 + "px";
     tipElem.style.top = e.clientY - 140 + "px";
-    tipElem.style.background = color.val.substr( 0, color.val.length - 2 ) + ", 0.9)";
     tipElem.style.color = color.isLowContrast ? "#333" : "#eee";
+    tipElem.style.background = color.val.substr( 0, color.val.length - 1 ) + ",0.85)";
     tipElem.classList.remove( "hide" );
 };
 let hideTip = ( e ) => {
@@ -122,6 +124,15 @@ let getPointToRender = ( datum ) => {
     pointElem.classList.add( "path", "path__point", thisCatg, `${ getMonthClassName( monthIdx ) }` );
 
     pointElems.push( pointElem );
+
+    // Bind click to open project homepage on Kickstarter website:
+    if( shouldOpenLinkOnClick )
+        pointElem.addEventListener( "click", e => {
+            window.open(
+                `https://www.kickstarter.com/projects/${ datum.id }/${ datum.slug }`,
+                "_blank"
+            );
+        });
 
     return pointElem;
 };
