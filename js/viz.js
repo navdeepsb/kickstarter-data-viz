@@ -152,6 +152,10 @@ let updatePointsToRender = () => {
 
 let isInit = true;
 let loadVIz = ( data ) => {
+    // Initialize the loader
+    focusedMonthElem.innerHTML = "Loading...";
+    focusedMonthElem.classList.remove( "hide", "active" );
+
     // Initialize the month selector:
     monthSelectorElem.value = "-1";
 
@@ -253,6 +257,7 @@ let focusSelectedMonthProjects = () => {
     const DEFAULT = -1;
 
     // Show this month:
+    focusedMonthElem.classList.add( "active" )
     focusedMonthElem.innerHTML = months[ mi ] || "";
 
     focusedMonthElem.classList.remove( "hide" );
@@ -308,13 +313,12 @@ focusedMonthElem.setAttribute( "y", vc + 7 );
 
 
 // ...
-// hide sidebar initially
-let isSidebarShown = true;
+let wasSidebarHidden = true;
 sidebarCTA.addEventListener( "click", ( e ) => {
     e.preventDefault();
-    sidebarElem.style.right = ( isSidebarShown ? 0 : ( -1 * sidebarElem.offsetWidth ) ) + "px";
-    filterImgElem.src = `img/filter${ isSidebarShown ? "-filled" : "" }.svg`;
-    isSidebarShown = !isSidebarShown;
+    sidebarElem.style.right = ( wasSidebarHidden ? 0 : ( -1 * sidebarElem.offsetWidth ) ) + "px";
+    filterImgElem.src = `img/filter${ wasSidebarHidden ? "-filled" : "" }.svg`;
+    wasSidebarHidden = !wasSidebarHidden;
 });
 
 
