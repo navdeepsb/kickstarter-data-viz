@@ -21,9 +21,6 @@ const focusedMonthElem = document.getElementById( "focusedMonth" );
 const sidebarElem = document.getElementById( "sidebar" );
 const sidebarCTA = document.querySelector( "#sidebar__cta a" );
 const filterImgElem = document.querySelector( "img.filter" );
-const dataFile = "data/final-data-opt-theater-3831rec.min.json";
-// const dataFile = "data/final-data-opt-photography-4301rec.min.json";
-// const dataFile = "data/final-data-opt-2000rec.min.json";
 const tipData = {
     "name": "Name",
     "category_name": "Category",
@@ -153,8 +150,45 @@ let updatePointsToRender = () => {
     }
 };
 
+let isInit = true;
 let loadVIz = ( data ) => {
+    // Initialize the month selector:
+    monthSelectorElem.value = "-1";
 
+    if( isInit ) {
+        // Set root element attribtutes:
+        svgElem.setAttribute( "width",  W + "px" );
+        svgElem.setAttribute( "height", H + "px" );
+        svgElem.setAttribute( "viewBox", `0 0 ${ W } ${ H }` );
+
+        // Offset the axis so the first month aligns to the vertical axis:
+        mainGrpElem.setAttribute( "transform", `rotate(-90 ${ hc },${ vc })`);
+    }
+    isInit = false;
+
+    axesGrpElem.innerHTML = `
+        <g class="axes">
+            <path class="path path--dashed" d="M${ hc },50 v${ AXIS_LEN }" />
+            <path class="path path--dashed" d="M${ hc },50 v${ AXIS_LEN }" transform="rotate( 90 ${ hc },${ vc })" />
+            <path class="path path--dashed" d="M${ hc },50 v${ AXIS_LEN }" transform="rotate( 30 ${ hc },${ vc })" />
+            <path class="path path--dashed" d="M${ hc },50 v${ AXIS_LEN }" transform="rotate(-30 ${ hc },${ vc })" />
+            <path class="path path--dashed" d="M${ hc },50 v${ AXIS_LEN }" transform="rotate( 60 ${ hc },${ vc })" />
+            <path class="path path--dashed" d="M${ hc },50 v${ AXIS_LEN }" transform="rotate(-60 ${ hc },${ vc })" />
+        </g><!-- #axes2 -->
+        <g class="axes" transform="rotate(15 ${ hc },${ vc })">
+            <path class="path path--alt" d="M${ hc },50 v${ AXIS_LEN }" />
+            <path class="path path--alt" d="M${ hc },50 v${ AXIS_LEN }" transform="rotate( 90 ${ hc },${ vc })" />
+            <path class="path path--alt" d="M${ hc },50 v${ AXIS_LEN }" transform="rotate( 30 ${ hc },${ vc })" />
+            <path class="path path--alt" d="M${ hc },50 v${ AXIS_LEN }" transform="rotate(-30 ${ hc },${ vc })" />
+            <path class="path path--alt" d="M${ hc },50 v${ AXIS_LEN }" transform="rotate( 60 ${ hc },${ vc })" />
+            <path class="path path--alt" d="M${ hc },50 v${ AXIS_LEN }" transform="rotate(-60 ${ hc },${ vc })" />
+            <circle class="path path--filled" cx="${ hc }" cy="${ vc }" r="${ innerCircleRadius }" />
+            <circle class="path path--alt path--dashed hide" cx="${ hc }" cy="${ vc }" r="100" />
+        </g><!-- #axes -->
+    `;
+
+    categories = {};
+    dataGrpElem.innerHTML = "";
     for( let i = 0, len = data.length; i < len; i++ ) {
         let d = data[ i ];
         let c = d.category_name;
@@ -172,6 +206,7 @@ let loadVIz = ( data ) => {
     // Make filters:
     let ct = null;
     let li = null;
+    filtersElem.innerHTML = "";
     Object.keys( categories ).forEach( ( c ) => {
         ct = getCategoryClassName( c );
         li = document.createElement( "li" );
@@ -257,6 +292,7 @@ Object.keys( tipData ).forEach( ( k ) => {
     tipElem.appendChild( tipInfo );
 });
 
+// reset month before set
 months.forEach( ( m, i ) => {
     let monthOption = document.createElement( "option" );
     monthOption.value = i;
@@ -272,6 +308,7 @@ focusedMonthElem.setAttribute( "y", vc + 7 );
 
 
 // ...
+// hide sidebar initially
 let isSidebarShown = true;
 sidebarCTA.addEventListener( "click", ( e ) => {
     e.preventDefault();
@@ -281,31 +318,3 @@ sidebarCTA.addEventListener( "click", ( e ) => {
 });
 
 
-// ...
-svgElem.setAttribute( "width",  W + "px" );
-svgElem.setAttribute( "height", H + "px" );
-svgElem.setAttribute( "viewBox", `0 0 ${ W } ${ H }` );
-
-// Offset the axis so the first month aligns to the vertical axis:
-mainGrpElem.setAttribute( "transform", `rotate(-90 ${ hc },${ vc })`);
-
-axesGrpElem.innerHTML = `
-    <g class="axes">
-        <path class="path path--dashed" d="M${ hc },50 v${ AXIS_LEN }" />
-        <path class="path path--dashed" d="M${ hc },50 v${ AXIS_LEN }" transform="rotate( 90 ${ hc },${ vc })" />
-        <path class="path path--dashed" d="M${ hc },50 v${ AXIS_LEN }" transform="rotate( 30 ${ hc },${ vc })" />
-        <path class="path path--dashed" d="M${ hc },50 v${ AXIS_LEN }" transform="rotate(-30 ${ hc },${ vc })" />
-        <path class="path path--dashed" d="M${ hc },50 v${ AXIS_LEN }" transform="rotate( 60 ${ hc },${ vc })" />
-        <path class="path path--dashed" d="M${ hc },50 v${ AXIS_LEN }" transform="rotate(-60 ${ hc },${ vc })" />
-    </g><!-- #axes2 -->
-    <g class="axes" transform="rotate(15 ${ hc },${ vc })">
-        <path class="path path--alt" d="M${ hc },50 v${ AXIS_LEN }" />
-        <path class="path path--alt" d="M${ hc },50 v${ AXIS_LEN }" transform="rotate( 90 ${ hc },${ vc })" />
-        <path class="path path--alt" d="M${ hc },50 v${ AXIS_LEN }" transform="rotate( 30 ${ hc },${ vc })" />
-        <path class="path path--alt" d="M${ hc },50 v${ AXIS_LEN }" transform="rotate(-30 ${ hc },${ vc })" />
-        <path class="path path--alt" d="M${ hc },50 v${ AXIS_LEN }" transform="rotate( 60 ${ hc },${ vc })" />
-        <path class="path path--alt" d="M${ hc },50 v${ AXIS_LEN }" transform="rotate(-60 ${ hc },${ vc })" />
-        <circle class="path path--filled" cx="${ hc }" cy="${ vc }" r="${ innerCircleRadius }" />
-        <circle class="path path--alt path--dashed hide" cx="${ hc }" cy="${ vc }" r="100" />
-    </g><!-- #axes -->
-`;
