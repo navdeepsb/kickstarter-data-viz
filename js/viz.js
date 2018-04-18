@@ -21,17 +21,38 @@ const focusedMonthElem = document.getElementById( "focusedMonth" );
 const sidebarElem = document.getElementById( "sidebar" );
 const sidebarCTA = document.querySelector( "#sidebar__cta a" );
 const filterImgElem = document.querySelector( "img.filter" );
-const tipData = {
-    "name": "Name",
-    "category_name": "Category",
-    "launch_date": "Launched on",
-    "create_date": "Created on",
-    "backers_count": "# of backers",
-    "goal": "Goal",
-    "pledged": "Pledged",
-    "perc_pledged": "% pledged",
-    "score": "Sentiment score"
-};
+const tipData = [{
+    key: "name",
+    displayTitle: "Name"
+},{
+    key: "category_name",
+    displayTitle: "Category"
+},{
+    key: "launch_date",
+    displayTitle: "Launched on"
+},{
+    key: "create_date",
+    displayTitle: "Created on"
+},{
+    key: "backers_count",
+    displayTitle: "# of backers",
+    formatter: ( s ) => `${ parseInt(s).toFixed().replace(/(\d)(?=(\d{3})+(,|$))/g, '$1,') }`
+},{
+    key: "goal",
+    displayTitle: "Goal",
+    formatter: ( s ) => `\$ ${ parseInt(s).toFixed().replace(/(\d)(?=(\d{3})+(,|$))/g, '$1,') }`
+},{
+    key: "pledged",
+    displayTitle: "Pledged",
+    formatter: ( s ) => `\$ ${ parseInt(s).toFixed().replace(/(\d)(?=(\d{3})+(,|$))/g, '$1,') }`
+},{
+    key: "perc_pledged",
+    displayTitle: "% pledged",
+    formatter: ( s ) => `${ s }%`
+},{
+    key: "score",
+    displayTitle: "Sentiment score"
+}];
 const months = [
     "Jan", "Feb", "Mar", "Apr",
     "May", "Jun", "Jul", "Aug",
@@ -71,8 +92,8 @@ let showTip = ( e ) => {
     if( e.target.classList.contains( "path__point--inactive" ) ) return;
 
     let currInfo = JSON.parse( e.target.getAttribute( "data-info" ) );
-    Object.keys( tipData ).forEach( ( k ) => {
-        document.getElementById( k ).innerText = currInfo[ k ];
+    tipData.forEach( ( td ) => {
+        document.getElementById( td.key ).innerText = td.formatter ? td.formatter( currInfo[ td.key ] ) : currInfo[ td.key ];
     });
     let catgIdx = Array.prototype.filter.call( e.target.classList, c => { return c.indexOf( "path__point--cat" ) >= 0 })[ 0 ].split( "path__point--cat" )[ 1 ];
     let color = colors[ catgIdx ];
@@ -89,7 +110,7 @@ let getCategoryClassName = ( s ) => "path__point--cat" + Object.keys( categories
 let getMonthClassName    = ( s ) => "path__point--month" + s;
 let getPropsToShow = ( d ) => {
     let _d = {};
-    Object.keys( tipData ).forEach( ( k ) => _d[ k ] = d[ k ] );
+    tipData.forEach( ( td ) => _d[ td.key ] = d[ td.key ] );
     return _d;
 };
 
@@ -286,12 +307,12 @@ let updateCurrCategories = () => {
 
 
 // ...
-Object.keys( tipData ).forEach( ( k ) => {
+tipData.forEach( ( td ) => {
     tipInfo = document.createElement( "div" );
     tipInfo.classList.add( "row" );
     tipInfo.innerHTML = `
-        <div class="col col--right"><p>${ tipData[ k ] } :</p></div><!--
-        --><div class="col"><p><span id="${ k }">x</span></p></div>
+        <div class="col col--right"><p>${ td.displayTitle } :</p></div><!--
+        --><div class="col"><p><span id="${ td.key }">x</span></p></div>
     `;
 
     tipElem.appendChild( tipInfo );
@@ -313,12 +334,12 @@ focusedMonthElem.setAttribute( "y", vc + 7 );
 
 
 // ...
-let wasSidebarHidden = true;
+let toShowSidebar = true;
 sidebarCTA.addEventListener( "click", ( e ) => {
     e.preventDefault();
-    sidebarElem.style.right = ( wasSidebarHidden ? 0 : ( -1 * sidebarElem.offsetWidth ) ) + "px";
-    filterImgElem.src = `img/filter${ wasSidebarHidden ? "-filled" : "" }.svg`;
-    wasSidebarHidden = !wasSidebarHidden;
+    sidebarElem.style.right = ( toShowSidebar ? 0 : ( -1 * sidebarElem.offsetWidth ) ) + "px";
+    filterImgElem.src = `img/filter${ toShowSidebar ? "-filled" : "" }.svg`;
+    toShowSidebar = !toShowSidebar;
 });
 
 
