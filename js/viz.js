@@ -222,6 +222,7 @@ let loadVIz = ( data ) => {
     `;
 
     categories = {};
+    pointElems = [];
     dataGrpElem.innerHTML = "";
     for( let i = 0, len = data.length; i < len; i++ ) {
         let d = data[ i ];
