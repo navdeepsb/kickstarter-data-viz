@@ -5,7 +5,7 @@ A web app to create information visualization for Kickstarter projects data. Dat
 <a href="http://www.navdeepsb.com/kickstarter-data-viz/" title="Kickstarter projects data visualization" target="_blank">Live demo of latest iteration</a><br />
 
 Other demos:<br/>
-<a href="https://rawgit.com/navdeepsb/kickstarter-data-viz/v3/sailorswheel.html" title="v3 - Kickstarter projects data visualization" target="_blank">v3</a><br />
+<a href="https://rawgit.com/navdeepsb/kickstarter-data-viz/v3/" title="v3 - Kickstarter projects data visualization" target="_blank">v3</a><br />
 <a href="https://rawgit.com/navdeepsb/kickstarter-data-viz/v2/sailorswheel.html" title="v2 - Kickstarter projects data visualization" target="_blank">v2</a><br />
 
 _NOTE: These demos contain 2,000 projects extracted from a JSON stream containing projects till Jan 2018._
