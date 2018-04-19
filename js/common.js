@@ -5,15 +5,19 @@ let header = document.querySelector( ".header" );
 Array.prototype.forEach.call( navLinks, link => {
     link.addEventListener( "click", e => {
         e.preventDefault();
-        navigateTo( e.target.getAttribute( "data-target" ) );
+        navigateTo(
+            e.target.getAttribute( "data-target" ),
+            cbs[ e.target.getAttribute( "data-cbi" ) ]
+        );
     });
 });
 
-let navigateTo = ( screenId ) => {
+let navigateTo = ( screenId, cb ) => {
     Array.prototype.forEach.call( siteSections, sect => {
         sect.classList.remove( "active" );
         if( "#" + sect.id == screenId ) {
             sect.classList.add( "active" );
+            if( typeof cb === "function" ) cb();
         }
     });
 };

@@ -1,8 +1,9 @@
-const slider = document.getElementById( "slider" );
+let shouldSkipRange = document.querySelector( "input[name=skipRange]:checked").value === "true";
+const slider = document.getElementById( "rangeSlider" );
 const radios = document.getElementsByName( "skipRange" );
 
 const onRadioChange = ( e ) => {
-    let shouldSkipRange = document.querySelector( "input[name=skipRange]:checked").value === "true";
+    shouldSkipRange = document.querySelector( "input[name=skipRange]:checked").value === "true";
 
     slider.classList[ shouldSkipRange ? "add" : "remove" ]( "hide" );
 };

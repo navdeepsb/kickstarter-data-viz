@@ -54,6 +54,7 @@
             <div class="subsection">
                 <h3>Step #2: Configure the expected goal (in USD) for your project</h3>
                 <p>If you have an idea about the goal you want to reach on Kickstarter, specify a range to see how past projects faired. Overlap the two slider handles for a single value or alternatively, skip this step.</p>
+                <p>Category selected: <span class="master-cat-name bold"></span></p>
             </div><!-- .subsection -->
 
             <div class="subsection">
@@ -61,7 +62,7 @@
                     <div>
                         <input type="radio" id="skipRange2" name="skipRange" value="false" />
                         <label for="skipRange2">I have an estimate about the goal for my project</label>
-                        <div id="slider" class="hide">
+                        <div id="rangeSlider" class="hide">
                             <div id="slider-margin"></div>
                             <div id="slider-margin-value-min"></div>
                             <div id="slider-margin-value-max"></div>
@@ -82,14 +83,15 @@
                 <a href="#back" class="btn btn__back navlink" data-target="#screen-2">
                     <img src="img/chevron-left.svg" alt="Go back" width="10" /> Go back
                 </a>
-                <a href="#next" class="btn navlink" data-target="#screen-4">View analysis</a>
+                <a href="#next" class="btn navlink" data-target="#screen-4" data-cbi="onSliderChange">View analysis</a>
             </div><!-- .subsection -->
         </div><!-- .container -->
     </section><!-- #screen-3 -->
 
     <section id="screen-4" class="section">
         <div class="subsection">
-            <p class="container">Showing <span class="master-cat-num-projs bold"></span> projects for <span class="master-cat-name bold"></span> category</p>
+            <p class="container">Plotted <span class="master-cat-num-projs bold"></span> projects for <span class="master-cat-name bold"></span> category</p>
+            <p id="goalRangeText" class="container"></p>
             <br />
             <svg id="svg">
                 <g id="main">

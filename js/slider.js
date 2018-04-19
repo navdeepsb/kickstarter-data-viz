@@ -5,6 +5,7 @@ var offset = 2000;
 var marginMin = document.getElementById( "slider-margin-value-min" );
 var marginMax = document.getElementById( "slider-margin-value-max" );
 var marginSlider = document.getElementById( "slider-margin" );
+var slider_min = slider_max = null;
 
 noUiSlider.create( marginSlider, {
     start: [ category_min, category_max - offset ],

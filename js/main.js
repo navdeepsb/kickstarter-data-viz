@@ -39,21 +39,16 @@ const onSelectCategory = ( cat, datum ) => {
     });
 
     Array.prototype.forEach.call( document.querySelectorAll( ".master-cat-num-projs" ), span => {
-        span.innerText = total;
+        span.innerText = numFormatter( total );
     });
 
-    if( total <= POINTS_LIMIT ) {
-        navigateTo( "#screen-3" );
-        loadFile( `data/final-data-opt-${ cat.toLowerCase() }.min.json`, loadVIz );
-    }
-    else {
-        navigateTo(  "#screen-5" );
-    }
+    dataFileCategory = cat.toLowerCase();
+    navigateTo( total <= POINTS_LIMIT ? "#screen-3" : "#screen-5" );
 }
 
 // ...
 loadFile( "data/categories-success-rate.json", loadBars );
 
-document.getElementById( "num-projects-limit" ).innerText = POINTS_LIMIT;
+document.getElementById( "num-projects-limit" ).innerText = numFormatter( POINTS_LIMIT );
 
 

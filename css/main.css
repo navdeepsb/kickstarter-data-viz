@@ -24,6 +24,7 @@ p {
 .container {
     max-width: 50em;
     margin: 0 auto;
+    padding: 0 15px;
 }
 
 .header {

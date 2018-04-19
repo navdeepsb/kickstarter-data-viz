@@ -21,6 +21,7 @@ const focusedMonthElem = document.getElementById( "focusedMonth" );
 const sidebarElem = document.getElementById( "sidebar" );
 const sidebarCTA = document.querySelector( "#sidebar__cta a" );
 const filterImgElem = document.querySelector( "img.filter" );
+const numFormatter = ( n ) => n.toFixed().replace(/(\d)(?=(\d{3})+(,|$))/g, '$1,');
 const tipData = [{
     key: "name",
     displayTitle: "Name"
@@ -36,15 +37,15 @@ const tipData = [{
 },{
     key: "backers_count",
     displayTitle: "# of backers",
-    formatter: ( s ) => `${ parseInt(s).toFixed().replace(/(\d)(?=(\d{3})+(,|$))/g, '$1,') }`
+    formatter: ( s ) => numFormatter( +s )
 },{
     key: "goal",
     displayTitle: "Goal",
-    formatter: ( s ) => `\$ ${ parseInt(s).toFixed().replace(/(\d)(?=(\d{3})+(,|$))/g, '$1,') }`
+    formatter: ( s ) => `\$ ${ numFormatter( +s ) }.00`
 },{
     key: "pledged",
     displayTitle: "Pledged",
-    formatter: ( s ) => `\$ ${ parseInt(s).toFixed().replace(/(\d)(?=(\d{3})+(,|$))/g, '$1,') }`
+    formatter: ( s ) => `\$ ${ numFormatter( +s ) }.00`
 },{
     key: "perc_pledged",
     displayTitle: "% pledged",
@@ -58,6 +59,13 @@ const months = [
     "May", "Jun", "Jul", "Aug",
     "Sep", "Oct", "Nov", "Dec"
 ];
+const cbs = {
+    onSliderChange: () => {
+        slider_min = +marginSlider.noUiSlider.get()[0];
+        slider_max = +marginSlider.noUiSlider.get()[1];
+        loadFile( `data/final-data-opt-${ dataFileCategory }.min.json`, loadVIz );
+    }
+};
 
 
 // ...
@@ -65,6 +73,7 @@ let categories = {};
 let categoriesToShow = [];
 let pointElems = [];
 let showOffset = offsetCheckElem.checked;
+let dataFileCategory = null;
 let tipInfo = null;
 let colors = [
     { "val": "rgb(230,  25,  75)", "hex": "#e6194b" },
@@ -252,6 +261,12 @@ let loadVIz = ( data ) => {
     // And update current categories initially:
     updateCurrCategories();
 
+    // Implement the goal range:
+    document.getElementById( "goalRangeText" ).innerHTML = "";
+    if( !shouldSkipRange ) {
+        removeOutOfGoalRangeProjects([ slider_min, slider_max ]);
+    }
+
     // Hide the loader:
     focusedMonthElem.classList.add( "hide" );
 };
@@ -303,6 +318,19 @@ let updateCurrCategories = () => {
     Array.prototype.forEach.call( document.querySelectorAll( ".filter input[type=checkbox]" ), ( c ) => {
         if( c.checked ) categoriesToShow.push( c.getAttribute( "data-cat" ) );
     });
+};
+let removeOutOfGoalRangeProjects = ( range ) => {
+    let numHidden = 0;
+
+    pointElems.forEach( p => {
+        let d = JSON.parse( p.getAttribute( "data-info" ) );
+        if( d.goal < range[ 0 ] || d.goal > range[ 1 ] ) {
+            p.remove();
+            numHidden++;
+        }
+    });
+
+    document.getElementById( "goalRangeText" ).innerHTML = `Removed <strong>${ numFormatter( numHidden ) }</strong> projects outside of the Goal range specified: Min goal= <strong>\$ ${ numFormatter( range[0] ) }.00</strong>, max goal= <strong>\$ ${ numFormatter( range[1] ) }.00</strong>`;
 };
 
 
